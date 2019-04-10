@@ -9,12 +9,12 @@
       description : <li><input class="form-control col-md-4" #description></li>
       cout			 : <li><input class="form-control col-md-4" #cout></li>
     <li><button type="button" class="btn btn-primary" 
-      (click)="insertProprio(noProprietaire.value, nom.value, adresse.value, adresse.value,numTel.value)"> Add Traitement</button></li>
+      (click)="insertTraitement(noTraitement.value, description.value, cout.value)"> Add Traitement</button></li>
     </ul>
   </div>
 
   <div id="ht" style="text-align:center" *ngIf="route != '/room'">
-    <button type="button" class="btn btn-primary" (click)="getProprios()">Get Traitements</button>
+    <button type="button" class="btn btn-primary" (click)="getTraitements()">Get Traitements</button>
     <table id ="ht" align="center" border="1" width="95%">
       <thead>
         <th> NO TRAITEMENT</th>
@@ -22,10 +22,10 @@
         <th> COUT</th>
       </thead>
       <tbody>
-        <tr *ngFor="let proprio of proprios">
-          <td> {{proprio.noTraitement}}</td>
-          <td> {{proprio.description}}</td>
-          <td> {{proprio.cout}}</td>
+        <tr *ngFor="let traitement of traitements">
+          <td> {{traitement.noTraitement}}</td>
+          <td> {{traitement.description}}</td>
+          <td> {{traitement.cout}}</td>
         </tr>
       </tbody>
     </table>

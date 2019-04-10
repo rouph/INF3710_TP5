@@ -4,6 +4,7 @@ import * as pg from "pg";
 
 import {Clinique} from "../../../common/tables/Clinique";
 import {Proprio} from "../../../common/tables/Proprio";
+import {Traitement} from "../../../common/tables/Traitement";
 
 import { DatabaseService } from "../services/database.service";
 import Types from "../types";
@@ -51,6 +52,22 @@ export class DatabaseController {
                     console.error(e.stack);
                 });
             });
+
+        router.get("/Traitements",
+            (req: Request, res: Response, next: NextFunction) => {
+             // Send the request to the service and send the response
+             this.databaseService.getTraitements().then((result: pg.QueryResult) => {
+             const traitements: Traitement[] = result.rows.map((pro: any) => (
+                 {
+                     "noTraitement" : pro.notraitement,
+                     "description" : pro.description,
+                     "cout" : pro.cout,
+             }));
+             res.json(traitements);
+         }).catch((e: Error) => {
+             console.error(e.stack);
+         });
+     });
         router.get("/Proprios/no",
                    (req: Request, res: Response, next: NextFunction) => {
                 this.databaseService.getProprietaireNo().then((result: pg.QueryResult) => {
@@ -119,8 +136,8 @@ export class DatabaseController {
         }).catch((e: Error) => {
             console.error(e.stack);
             res.json(-1);
+            });
         });
-});
 
         router.post("/proprio/insert",
                     (req: Request, res: Response, next: NextFunction) => {
@@ -134,8 +151,23 @@ export class DatabaseController {
         }).catch((e: Error) => {
             console.error(e.stack);
             res.json(-1);
+            });
         });
+
+        router.post("/traitement/insert",
+                    (req: Request, res: Response, next: NextFunction) => {
+            const noTraitement: string = req.body.noTraitement;
+            const description: string = req.body.description;
+            const cout: string = req.body.cout;
+            this.databaseService.createTraitement(noTraitement, description, cout).then((result: pg.QueryResult) => {
+            res.json(result.rowCount);
+        }).catch((e: Error) => {
+            console.error(e.stack);
+            res.json(-1);
+            });
         });
+
+        
 
         router.get("/tables/:tableName",
                    (req: Request, res: Response, next: NextFunction) => {

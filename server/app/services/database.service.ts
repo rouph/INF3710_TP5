@@ -3,7 +3,6 @@ import * as pg from "pg";
 import "reflect-metadata";
 import {schema} from "../createSchema";
 import {data} from "../populateDB";
-import { Room } from "../../../common/tables/Room";
 
 @injectable()
 export class DatabaseService {
@@ -51,6 +50,11 @@ export class DatabaseService {
     public getProprios(): Promise<pg.QueryResult> {
 
         return this.pool.query('SELECT * FROM TP5_schema.Proprietaire;');
+    }
+
+    public getTraitements(): Promise<pg.QueryResult> {
+
+        return this.pool.query('SELECT * FROM TP5_schema.Traitement;');
     }
        // this.pool.connect();
     public getCliniqueNo(): Promise<pg.QueryResult> {
@@ -108,6 +112,21 @@ export class DatabaseService {
         return this.pool.query(queryText, values);
     }
 
+    public createTraitement(noTraitement: string,description: string, cout: string): Promise<pg.QueryResult> {
+        //  this.pool.connect();
+        const values: string[] = [
+        noTraitement,
+        description,
+        cout,
+        ];
+        const queryText: string = `INSERT INTO TP5_schema.Traitement VALUES($1, $2, $3);`;
+
+        return this.pool.query(queryText, values);
+    }
+
+
+
+    /*
     // ROOM
     public getRoomFromHotel(hotelNo: string, roomType: string, price: number): Promise<pg.QueryResult> {
        // this.pool.connect();
@@ -168,5 +187,5 @@ export class DatabaseService {
         return this.pool.query(queryText, values);
     }
 
-
+    */
 }

@@ -49,6 +49,14 @@ export class CommunicationService {
         );
     }
 
+    public getTraitements(): Observable<any[]> {
+
+        return this.http.get<Proprio[]>(this.BASE_URL + "/Traitements").pipe(
+            catchError(this.handleError<Proprio[]>("getTraitements")),
+        );
+    }
+
+
     /*
     public getHotelPKs(): Observable<string[]> {
 
@@ -72,6 +80,12 @@ export class CommunicationService {
     public insertProprio(Proprio: any): Observable<number> {
         return this.http.post<number>(this.BASE_URL + "/proprio/insert", Proprio).pipe(
             catchError(this.handleError<number>("insertProprio")),
+        );
+    }
+
+    public insertTraitement(Traitement: any): Observable<number> {
+        return this.http.post<number>(this.BASE_URL + "/traitement/insert", Traitement).pipe(
+            catchError(this.handleError<number>("insertTraitement")),
         );
     }
 
