@@ -9,6 +9,7 @@ import { CliniqueVetComponent } from "./clinique-vet/clinique-vet.component";
 import { CommunicationService } from "./communication.service";
 import { ProprioAnimalComponent } from './proprio-animal/proprio-animal.component';
 import { AnimalComponent } from './animal/animal.component';
+import { TraitementComponent } from './traitement/traitement.component';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { AnimalComponent } from './animal/animal.component';
     CliniqueVetComponent,
     ProprioAnimalComponent,
     AnimalComponent,
+    TraitementComponent,
   ],
   imports: [
     CommonModule,
