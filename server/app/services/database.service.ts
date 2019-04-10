@@ -48,10 +48,10 @@ export class DatabaseService {
         return this.pool.query('SELECT * FROM tp5_schema.cliniquevet;');
     }
 
-    public getHotelNo(): Promise<pg.QueryResult> {
+    public getCliniqueNo(): Promise<pg.QueryResult> {
        // this.pool.connect();
 
-        return this.pool.query('SELECT hotelNo FROM HOTELDB.Hotel;');
+        return this.pool.query('SELECT noClinique FROM tp5_schema.cliniquevet;');
     }
     
     public createClinique(cliniqueNumber: string,cliniqueName: string,
@@ -67,6 +67,25 @@ export class DatabaseService {
         const queryText: string = `INSERT INTO TP5_schema.CliniqueVet VALUES($1, $2, $3, $4, $5);`;
 
         return this.pool.query(queryText, values);
+    }
+    public createEmploye(noEmploye: string, nom: string,adresse:string, dob: string, sex: string, tellNum: string,
+                         NAS: string, salaire: string, fonction: string,noClinique: string){
+
+            const values: string[] = [
+                noEmploye,
+                nom,
+                adresse,
+                dob,
+                sex,
+                tellNum,
+                NAS,
+                salaire,
+                fonction,
+                noClinique
+            ];
+            const queryText: string = `INSERT INTO TP5_schema.Employe VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10);`;
+
+            return this.pool.query(queryText, values);
     }
 
     // ROOM

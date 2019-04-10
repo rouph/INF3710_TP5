@@ -31,7 +31,7 @@ export class AppComponent implements OnInit {
         });
     }
 
-  
+
     public createDB(): void {
         this.communicationService.setUpDatabase().subscribe((res: any) => {
             console.log(res);

@@ -21,7 +21,7 @@ export class CliniqueVetComponent implements OnInit {
     this.communicationService.getCliniques().subscribe((cliniques: Clinique[]) => {
         this.cliniques = cliniques;
     });
-}
+  }
   public insertClinique(cliniqueNumber: string,cliniqueName:string, adresse: string, telNumber: string, faxNumber: string): void {
     const clinique: any = {
         "cliniqueNumber" : cliniqueNumber,

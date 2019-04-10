@@ -1,0 +1,63 @@
+
+<div id="hotel" style="text-align: left">
+    <h1> Cliniques</h1>
+    <div id="error" class="alert alert-danger" role="alert" *ngIf="duplicateError">
+      Insertion sur une cle primaire qui existe deja
+    </div>
+      <ul style="list-style: none;">
+        noEmployé : <li><input class="form-control col-md-4" #noEmploye></li>
+        nom : <li><input class="form-control col-md-4" #nom></li>
+        adresse: <li><input class="form-control col-md-4" #adresse></li>
+        date de naissance : <li><input  class="form-control col-md-4" #dob></li>
+        sex : <li>
+              <select class="form-control col-md-4" #sex>
+              <option>M</option>
+              <option>F</option>
+              </select>
+              </li>
+        tell num : <li><input  class="form-control col-md-4" #tellNum></li>
+        NAS : <li><input  class="form-control col-md-4" #NAS></li>
+        salaire : <li><input  class="form-control col-md-4" #salaire></li>
+        fonction :  <li>
+                        <select class="form-control col-md-4" #fonction>
+                        <option>veterinaire</option>
+                        <option>infirmiere</option>
+                        <option>secretaire</option>
+                        <option>concierge</option>
+                        <option>gestionnaire</option>
+                        </select>
+                    </li>
+        Clinique no: <li>
+                          <select class="form-control col-md-4" #noClinique>
+                          <option  *ngFor="let cliniqueNo of cliniquesNo" >{{cliniqueNo}}</option>
+                          </select>
+                      </li>
+      <li><button type="button" class="btn btn-primary" 
+        (click)="insertClinique(noEmploye.value,nom.value, 
+                          adresse.value, dob.value,sex.value,tellNum.value,NAS.value,salaire.value,fonction.value,noClinique.value)"> Add Clinique</button></li>
+      </ul>
+    </div>
+  
+    <div id="ht" style="text-align:center" *ngIf="route != '/room'">
+      <button type="button" class="btn btn-primary" (click)="getCliniques()">Get Cliniques</button>
+      <table id ="ht" align="center" border="1" width="95%">
+        <thead>
+          <th> CLINIQUE NO</th>
+          <th> NOM</th>
+          <th> ADRESSE</th>
+          <th> TELL NUM</th>
+          <th> FAX</th>
+        </thead>
+        <tbody>
+          <tr *ngFor="let clinique of cliniques">
+            <td> {{clinique.cliniqueNumber}}</td>
+            <td> {{clinique.cliniqueName}}</td>
+            <td> {{clinique.adresse}}</td>
+            <td> {{clinique.telNumber}}</td>
+            <td> {{clinique.faxNumber}} </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    
+  
