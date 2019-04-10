@@ -1,7 +1,7 @@
 import { Location } from "@angular/common";
 import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
-import { Hotel } from "../../../common/tables/Hotel";
+import { Hotel } from "../../../common/tables/Clinique";
 import { CommunicationService } from "./communication.service";
 
 @Component({

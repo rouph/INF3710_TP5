@@ -43,10 +43,9 @@ export class DatabaseService {
     }
 
     // HOTEL
-    public getHotels(): Promise<pg.QueryResult> {
-       // this.pool.connect();
+    public getCliniques(): Promise<pg.QueryResult> {
 
-        return this.pool.query('SELECT * FROM HOTELDB.Hotel;');
+        return this.pool.query('SELECT * FROM tp5_schema.cliniquevet;');
     }
 
     public getHotelNo(): Promise<pg.QueryResult> {

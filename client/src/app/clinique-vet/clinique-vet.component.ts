@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommunicationService } from '../communication.service';
+import { Clinique } from '../../../../common/tables/Clinique';
 
 @Component({
   selector: 'app-clinique-vet',
@@ -8,6 +9,7 @@ import { CommunicationService } from '../communication.service';
 })
 export class CliniqueVetComponent implements OnInit {
   public constructor(private communicationService: CommunicationService) { }
+  public cliniques: Clinique[] = [];
 
 
   public duplicateError: boolean = false;
@@ -15,7 +17,11 @@ export class CliniqueVetComponent implements OnInit {
 
   ngOnInit() {
   }
-
+  public getCliniques(): void {
+    this.communicationService.getCliniques().subscribe((cliniques: Clinique[]) => {
+        this.cliniques = cliniques;
+    });
+}
   public insertClinique(cliniqueNumber: string,cliniqueName:string, adresse: string, telNumber: string, faxNumber: string): void {
     const clinique: any = {
         "cliniqueNumber" : cliniqueNumber,

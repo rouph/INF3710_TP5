@@ -13,6 +13,27 @@
     <li><button type="button" class="btn btn-primary" 
       (click)="insertClinique(cliniqueNo.value,cliniqueName.value, adresse.value, telNumber.value,faxNumber.value)"> Add Clinique</button></li>
     </ul>
-   
+  </div>
+
+  <div id="ht" style="text-align:center" *ngIf="route != '/room'">
+    <button type="button" class="btn btn-primary" (click)="getCliniques()">Get Cliniques</button>
+    <table id ="ht" align="center" border="1" width="350">
+      <thead>
+        <th> CLINIQUE NO</th>
+        <th> NOM</th>
+        <th> ADRESSE</th>
+        <th> TELL NUM</th>
+        <th> FAX</th>
+      </thead>
+      <tbody>
+        <tr *ngFor="let clinique of cliniques">
+          <td> {{clinique.cliniqueNumber}}</td>
+          <td> {{clinique.cliniqueName}}</td>
+          <td> {{clinique.adresse}}</td>
+          <td> {{clinique.telNumber}}</td>
+          <td> {{clinique.faxNumber}} </td>
+        </tr>
+      </tbody>
+    </table>
   </div>
   

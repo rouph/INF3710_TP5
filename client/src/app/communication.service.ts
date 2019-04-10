@@ -1,6 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import {Hotel} from "../../../common/tables/Hotel";
+import { Clinique} from "../../../common/tables/Clinique";
 // tslint:disable-next-line:ordered-imports
 import { of, Observable,concat, Subject } from "rxjs";
 import { catchError } from "rxjs/operators";
@@ -23,10 +23,10 @@ export class CommunicationService {
     }
 
 
-    public getHotels(): Observable<any[]> {
+    public getCliniques(): Observable<any[]> {
 
-        return this.http.get<Hotel[]>(this.BASE_URL + "/hotel").pipe(
-            catchError(this.handleError<Hotel[]>("getHotels")),
+        return this.http.get<Clinique[]>(this.BASE_URL + "/Clinique").pipe(
+            catchError(this.handleError<Clinique[]>("getClinique")),
         );
     }
 

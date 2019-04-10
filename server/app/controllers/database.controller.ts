@@ -2,7 +2,7 @@ import { NextFunction, Request, Response, Router } from "express";
 import { inject, injectable } from "inversify";
 import * as pg from "pg";
 
-import {Hotel} from "../../../common/tables/Hotel";
+import {Hotel} from "../../../common/tables/Clinique";
 import {Room} from '../../../common/tables/Room';
 
 import { DatabaseService } from "../services/database.service";
@@ -35,17 +35,19 @@ export class DatabaseController {
                     });
         });
 
-        router.get("/hotel",
+        router.get("/Clinique",
                    (req: Request, res: Response, next: NextFunction) => {
                     // Send the request to the service and send the response
-                    this.databaseService.getHotels().then((result: pg.QueryResult) => {
-                    const hotels: Hotel[] = result.rows.map((hot: any) => (
+                    this.databaseService.getCliniques().then((result: pg.QueryResult) => {
+                    const cliniques: Hotel[] = result.rows.map((cli: any) => (
                         {
-                        hotelno: hot.hotelno,
-                        hotelname: hot.hotelname,
-                        city: hot.city
+                            "cliniqueNumber" : cli.noclinique,
+                            "cliniqueName" : cli.nom,
+                            "adresse" : cli.adresseclinique,
+                            "telNumber" : cli.numtel,
+                            "faxNumber" : cli.numtelecopieur,
                     }));
-                    res.json(hotels);
+                    res.json(cliniques);
                 }).catch((e: Error) => {
                     console.error(e.stack);
                 });
