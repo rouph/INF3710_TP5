@@ -43,6 +43,12 @@ export class CommunicationService {
         );
     }
 
+    public inserProprio(Proprio: any): Observable<number> {
+        return this.http.post<number>(this.BASE_URL + "/proprio/insert", Proprio).pipe(
+            catchError(this.handleError<number>("insertProprio")),
+        );
+    }
+
     public insertRoom(room: Room): Observable<number> {
         return this.http.post<number>(this.BASE_URL + "/rooms/insert", room).pipe(
             catchError(this.handleError<number>("inserHotel")),
