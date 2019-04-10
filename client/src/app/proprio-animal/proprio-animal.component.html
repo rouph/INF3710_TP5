@@ -10,7 +10,7 @@
       adresse			 : <li><input class="form-control col-md-4" #adresse></li>
       numTel : <li><input  class="form-control col-md-4" #numTel></li>
     <li><button type="button" class="btn btn-primary" 
-      (click)="insertProprio(noProprietaire.value,nom.value, adresse.value, adresse.value,numTel.value)"> Add Proprio</button></li>
+      (click)="insertProprio(noProprietaire.value, nom.value, adresse.value, adresse.value,numTel.value)"> Add Proprio</button></li>
     </ul>
   </div>
 
@@ -28,7 +28,7 @@
           <td> {{proprio.noProprietaire}}</td>
           <td> {{proprio.nom}}</td>
           <td> {{proprio.adresse}}</td>
-          <td> {{proprio.numTel}}</td>
+          <td> {{proprio.telNumber}}</td>
         </tr>
       </tbody>
     </table>

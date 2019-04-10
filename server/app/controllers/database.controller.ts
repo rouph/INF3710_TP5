@@ -2,8 +2,8 @@ import { NextFunction, Request, Response, Router } from "express";
 import { inject, injectable } from "inversify";
 import * as pg from "pg";
 
-import {Hotel} from "../../../common/tables/Clinique";
-import {Room} from '../../../common/tables/Room';
+import {Clinique} from "../../../common/tables/Clinique";
+import {Proprio} from "../../../common/tables/Proprio";
 
 import { DatabaseService } from "../services/database.service";
 import Types from "../types";
@@ -35,11 +35,28 @@ export class DatabaseController {
                     });
         });
 
+        router.get("/Proprios",
+                   (req: Request, res: Response, next: NextFunction) => {
+                    // Send the request to the service and send the response
+                    this.databaseService.getProprios().then((result: pg.QueryResult) => {
+                    const proprios: Proprio[] = result.rows.map((pro: any) => (
+                        {
+                            "noProprietaire" : pro.noproprietaire,
+                            "nom" : pro.nom,
+                            "adresse" : pro.adresse,
+                            "telNumber" : pro.numtel,
+                    }));
+                    res.json(proprios);
+                }).catch((e: Error) => {
+                    console.error(e.stack);
+                });
+            });
+
         router.get("/Clinique",
                    (req: Request, res: Response, next: NextFunction) => {
                     // Send the request to the service and send the response
                     this.databaseService.getCliniques().then((result: pg.QueryResult) => {
-                    const cliniques: Hotel[] = result.rows.map((cli: any) => (
+                    const cliniques: Clinique[] = result.rows.map((cli: any) => (
                         {
                             "cliniqueNumber" : cli.noclinique,
                             "cliniqueName" : cli.nom,
@@ -52,6 +69,7 @@ export class DatabaseController {
                     console.error(e.stack);
                 });
             });
+<<<<<<< HEAD
         router.get("/Clinique/no",
                    (req: Request, res: Response, next: NextFunction) => {
             this.databaseService.getCliniqueNo().then((result: pg.QueryResult) => {
@@ -61,6 +79,20 @@ export class DatabaseController {
               console.error(e.stack);
           });
      });
+=======
+
+        /*
+        router.get("/hotel/hotelNo",
+                   (req: Request, res: Response, next: NextFunction) => {
+                      this.databaseService.getHotelNo().then((result: pg.QueryResult) => {
+                        const hotelPKs: string[] = result.rows.map((row: any) => row.hotelno);
+                        res.json(hotelPKs);
+                      }).catch((e: Error) => {
+                        console.error(e.stack);
+                    });
+                  });
+        */        
+>>>>>>> e9a3e8656ebc48ba197c8278b3016f1ad2163aa8
         router.post("/clinique/insert",
                     (req: Request, res: Response, next: NextFunction) => {
                         const cliniqueNumber: string = req.body.cliniqueNumber;
@@ -95,42 +127,19 @@ export class DatabaseController {
         });
 });
 
-        router.get("/rooms",
-                   (req: Request, res: Response, next: NextFunction) => {
-
-                    // this.databaseService.getRoomFromHotel(req.query.hotelNo, req.query.roomType, req.query.price)
-                    this.databaseService.getRoomFromHotelParams(req.query)
-                    .then((result: pg.QueryResult) => {
-                        const rooms: Room[] = result.rows.map((room: Room) => (
-                            {
-                            hotelno: room.hotelno,
-                            roomno: room.roomno,
-                            typeroom: room.typeroom,
-                            price: parseFloat(room.price.toString())
-                        }));
-                        res.json(rooms);
-                    }).catch((e: Error) => {
-                        console.error(e.stack);
-                    });
-            });
-
-        router.post("/rooms/insert",
-                    (req: Request, res: Response, next: NextFunction) => {
-                    const room: Room = {
-                        hotelno: req.body.hotelno,
-                        roomno: req.body.roomno,
-                        typeroom: req.body.typeroom,
-                        price: parseFloat(req.body.price)};
-                    console.log(room);
-
-                    this.databaseService.createRoom(room)
-                    .then((result: pg.QueryResult) => {
-                        res.json(result.rowCount);
-                    })
-                    .catch((e: Error) => {
-                        console.error(e.stack);
-                        res.json(-1);
-                    });
+        router.post("/proprio/insert",
+        (req: Request, res: Response, next: NextFunction) => {
+            const noProprietaire: string = req.body.noProprietaire;
+            const nom: string = req.body.nom;
+            const adresse: string = req.body.adresse;
+            const telNumber: string = req.body.telNumber;
+          
+            this.databaseService.createProprio(noProprietaire, nom, adresse, telNumber).then((result: pg.QueryResult) => {
+            res.json(result.rowCount);
+        }).catch((e: Error) => {
+            console.error(e.stack);
+            res.json(-1);
+        });
         });
 
         router.get("/tables/:tableName",

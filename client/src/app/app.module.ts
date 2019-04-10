@@ -7,17 +7,17 @@ import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 import { CliniqueVetComponent } from "./clinique-vet/clinique-vet.component";
 import { CommunicationService } from "./communication.service";
-import { RoomComponent } from "./room/room.component";
 import { ProprioAnimalComponent } from './proprio-animal/proprio-animal.component';
 import { EmployeComponent } from './employe/employe.component';
+import { AnimalComponent } from './animal/animal.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    RoomComponent,
     CliniqueVetComponent,
     ProprioAnimalComponent,
     EmployeComponent,
+    AnimalComponent,
   ],
   imports: [
     CommonModule,

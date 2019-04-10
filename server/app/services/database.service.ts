@@ -11,7 +11,7 @@ export class DatabaseService {
     // A MODIFIER POUR VOTRE BD
     public connectionConfig: pg.ConnectionConfig = {
         user: "admin",
-        database: "pg_exemple",
+        database: "TP5",
         password: "admin",
         port: 5432,
         host: "127.0.0.1",
@@ -42,13 +42,22 @@ export class DatabaseService {
         return this.pool.query(`SELECT * FROM HOTELDB.${tableName};`);
     }
 
-    // HOTEL
     public getCliniques(): Promise<pg.QueryResult> {
 
         return this.pool.query('SELECT * FROM tp5_schema.cliniquevet;');
     }
 
+<<<<<<< HEAD
     public getCliniqueNo(): Promise<pg.QueryResult> {
+=======
+    public getProprios(): Promise<pg.QueryResult> {
+
+        return this.pool.query('SELECT * FROM TP5_schema.Proprietaire;');
+    }
+
+
+    public getHotelNo(): Promise<pg.QueryResult> {
+>>>>>>> e9a3e8656ebc48ba197c8278b3016f1ad2163aa8
        // this.pool.connect();
 
         return this.pool.query('SELECT noClinique FROM tp5_schema.cliniquevet;');
@@ -86,6 +95,19 @@ export class DatabaseService {
             const queryText: string = `INSERT INTO TP5_schema.Employe VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10);`;
 
             return this.pool.query(queryText, values);
+    }
+
+    public createProprio(noProprietaire: string,nom: string, adresse: string, telNumber: string): Promise<pg.QueryResult> {
+        //  this.pool.connect();
+        const values: string[] = [
+        noProprietaire,
+        nom,
+        adresse,
+        telNumber,
+        ];
+        const queryText: string = `INSERT INTO TP5_schema.Proprietaire VALUES($1, $2, $3, $4);`;
+
+        return this.pool.query(queryText, values);
     }
 
     // ROOM
@@ -148,41 +170,5 @@ export class DatabaseService {
         return this.pool.query(queryText, values);
     }
 
-    // GUEST
-    public createGuest(guestNo: string,
-                       nas: string,
-                       guestName: string,
-                       gender: string,
-                       guestCity: string): Promise<pg.QueryResult> {
-        //this.pool.connect();
-        const values: string[] = [
-            guestNo,
-            nas,
-            guestName,
-            gender,
-            guestCity
-        ];
-        const queryText: string = `INSERT INTO HOTELDB.ROOM VALUES($1,$2,$3,$4,$5);`;
 
-        return this.pool.query(queryText, values);
-    }
-
-    // BOOKING
-    public createBooking(hotelNo: string,
-                         guestNo: string,
-                         dateFrom: Date,
-                         dateTo: Date,
-                         roomNo: string): Promise<pg.QueryResult> {
-       // this.pool.connect();
-        const values: string[] = [
-            hotelNo,
-            guestNo,
-            dateFrom.toString(),
-            dateTo.toString(),
-            roomNo
-        ];
-        const queryText: string = `INSERT INTO HOTELDB.ROOM VALUES($1,$2,$3,$4,$5);`;
-
-        return this.pool.query(queryText, values);
-        }
 }
