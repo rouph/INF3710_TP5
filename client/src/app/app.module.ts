@@ -8,12 +8,14 @@ import { AppComponent } from "./app.component";
 import { CliniqueVetComponent } from "./clinique-vet/clinique-vet.component";
 import { CommunicationService } from "./communication.service";
 import { RoomComponent } from "./room/room.component";
+import { ProprioAnimalComponent } from './proprio-animal/proprio-animal.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     RoomComponent,
     CliniqueVetComponent,
+    ProprioAnimalComponent,
   ],
   imports: [
     CommonModule,
