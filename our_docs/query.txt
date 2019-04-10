@@ -1,0 +1,149 @@
+--Hugo Lirette(1896849) et Elie Rouphael(1829529)
+
+--1) Lister les le numéro et nom des cliniques, leur adresse et leur gestionnaire, ordonnés par le
+-- numéro de clinique
+
+--SELECT cvet.noClinique, cvet.nom, cvet.adresseClinique, e.nom AS nom_Gestionnaire
+--FROM TP5_schema.CliniqueVet as cvet INNER JOIN TP5_schema.Employe as e
+--ON cvet.noClinique = e.noClinique
+--WHERE e.fonction = 'gestionnaire'
+--GROUP BY cvet.noClinique, e.nom;
+
+SELECT cvet.noClinique, cvet.nom, cvet.adresseClinique, e.nom AS nom_Gestionnaire
+FROM TP5_schema.CliniqueVet as cvet, TP5_schema.Employe as e
+WHERE cvet.noClinique = e.noClinique AND e.fonction = 'gestionnaire'
+GROUP BY cvet.noClinique, e.nom;
+
+--2) Lister les noms des animaux sans doublons dans toutes les cliniques
+
+SELECT cvet.noClinique, a.nom AS nom_Animal
+FROM TP5_schema.CliniqueVet as cvet, TP5_schema.Animal as a
+WHERE cvet.noClinique = a.noClinique
+GROUP BY cvet.noClinique, a.nom
+ORDER BY cvet.noClinique;
+
+--3) Lister les numéros et noms des propriétaires d’animaux ainsi que les détails de leurs
+-- animaux dans une clinique donnée (à vous de la choisir)
+
+SELECT pro.noProprietaire, pro.nom, animal.*
+FROM TP5_schema.Proprietaire pro, TP5_schema.Animal animal 
+WHERE pro.noProprietaire = animal.noProprietaire 
+AND animal.noClinique = 'C50';
+
+--4) Lister l’ensemble des examens d’un animal donné
+
+SELECT * 
+FROM TP5_schema.Examen
+WHERE noAnimal = 'A001';
+
+--5) Lister le détail des traitements d’un animal suite à un examen donné
+
+SELECT propoTr.noExamen, tr.*
+FROM TP5_schema.Traitement AS tr, TP5_schema.PropositionTraitement AS propoTr
+WHERE tr.noTraitement = propoTr.noTraitement AND noExamen='Ex02';
+
+-- 6) Lister le salaire total des employés par clinique ordonné par numéro de clinique
+
+SELECT noClinique, SUM(salaire) AS TotalDesSalaires
+FROM TP5_schema.Employe
+GROUP BY noClinique;
+
+--7) Lister le nombre total d’animaux d’un type donné (vous pouvez le choisir) dans chaque
+--clinique
+
+SELECT noClinique, COUNT(noClinique) AS nbAnimaux
+FROM TP5_schema.Animal
+WHERE type_='chien'
+GROUP BY noClinique;
+
+
+--8) Lister le coût minimum, maximum et moyen des traitements 
+
+SELECT MIN(cout) AS coutMin, MAX(cout) AS coutMax, AVG(cout) AS coutMoy
+FROM TP5_schema.Traitement;
+
+--9) Quels sont les noms des employés de plus de 50 ans ordonnés par nom ?
+
+
+--10) Quels sont les propriétaires dont le nom contient « blay » ?
+
+SELECT *
+FROM TP5_schema.Proprietaire
+WHERE LOWER(nom) LIKE LOWER('%blay%');
+
+--11) Supprimez le vétérinaire « Jean Tremblay »
+--On peut voir qu'il est dans la base de données
+SELECT *
+FROM TP5_schema.Employe
+WHERE nom = 'Jean Tremblay';
+
+DELETE 
+FROM TP5_schema.Employe
+WHERE nom='Jean Tremblay' AND fonction='veterinaire';
+
+SELECT *
+FROM TP5_schema.Employe
+WHERE nom = 'Jean Tremblay';
+
+--12) Lister les détails des propriétaires qui ont un chat et un chien
+
+SELECT *
+FROM Tp5_schema.Proprietaire
+WHERE noProprietaire IN(
+	SELECT noProprietaire
+	FROM TP5_schema.Animal
+	WHERE type_='chien'
+INTERSECT
+	SELECT noProprietaire
+	FROM TP5_schema.Animal
+	WHERE type_='chat');
+		
+--13) Lister les détails des propriétaires qui ont un chat ou un chien
+
+SELECT *
+FROM Tp5_schema.Proprietaire 
+WHERE noProprietaire IN(
+	SELECT noProprietaire
+	FROM TP5_schema.Animal
+	WHERE type_='chien'
+UNION
+	SELECT noProprietaire
+	FROM TP5_schema.Animal
+	WHERE type_='chat');
+
+--14) Lister les détails des propriétaires qui ont un chat mais pas de chien vacciné contre la
+--grippe (la condition vacciné contre la grippe ne s’applique qu’aux chiens)
+
+SELECT *
+FROM Tp5_schema.Proprietaire 
+WHERE noProprietaire IN(
+	SELECT noProprietaire
+	FROM TP5_schema.Animal
+	WHERE type_='chat'
+EXCEPT
+	SELECT noProprietaire
+	FROM TP5_schema.Animal AS animal
+	WHERE animal.type_='chien' AND animal.noAnimal IN(
+		SELECT noAnimal
+		FROM TP5_schema.Examen 
+		WHERE  noExamen IN(
+			SELECT propoTr.noExamen
+			FROM TP5_schema.Traitement AS tr, TP5_schema.PropositionTraitement AS propoTr
+			WHERE tr.noTraitement = propoTr.noTraitement AND tr.description='Vaccination contre la grippe'
+		)));
+
+--15) Lister tous les animaux d’une clinique donnée avec leurs traitements s’ils existent. Dans le
+--cas contraire, affichez null. 
+
+Select *			
+FROM(
+		SELECT animal.* , ex.noExamen
+		FROM TP5_schema.Animal as animal  left JOIN TP5_schema.Examen as ex  ON animal.noAnimal= ex.noAnimal
+	) as animalExam left join (
+		SELECT propoTr.noExamen, tr.*
+		FROM TP5_schema.Traitement AS tr, TP5_schema.PropositionTraitement AS propoTr
+		WHERE tr.noTraitement = propoTr.noTraitement
+	) as examTRaitement 
+		ON animalExam.noExamen= examTRaitement.noExamen 
+WHERE noClinique = 'C50'
+ORDER BY noAnimal;
