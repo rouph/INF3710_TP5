@@ -38,12 +38,14 @@ export class CommunicationService {
         );
     }
 
+    /*
     public getHotelPKs(): Observable<string[]> {
 
         return this.http.get<string[]>(this.BASE_URL + "/hotel/hotelNo").pipe(
             catchError(this.handleError<string[]>("getHotelPKs")),
         );
     }
+    */
 
     public insertClinique(Clinique: any): Observable<number> {
         return this.http.post<number>(this.BASE_URL + "/clinique/insert", Clinique).pipe(
@@ -57,11 +59,6 @@ export class CommunicationService {
         );
     }
 
-    public insertRoom(room: Room): Observable<number> {
-        return this.http.post<number>(this.BASE_URL + "/rooms/insert", room).pipe(
-            catchError(this.handleError<number>("inserHotel")),
-        );
-    }
 
     public setUpDatabase(): Observable<any> {
         return concat(this.http.post<any>(this.BASE_URL + "/createSchema", []),
