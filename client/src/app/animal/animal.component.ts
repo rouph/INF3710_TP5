@@ -1,17 +1,17 @@
-import { Component, OnInit } from '@angular/core';
-import { CommunicationService } from '../communication.service';
+import { Component, OnInit } from "@angular/core";
+import { CommunicationService } from "../communication.service";
 
 @Component({
-  selector: 'app-animal',
-  templateUrl: './animal.component.html',
-  styleUrls: ['./animal.component.css']
+  selector: "app-animal",
+  templateUrl: "./animal.component.html",
+  styleUrls: ["./animal.component.css"]
 })
 export class AnimalComponent implements OnInit {
   public propriosNo: string[];
   public cliniquesNo: string[];
-  constructor(private communicationService: CommunicationService) { }
+  public constructor(private communicationService: CommunicationService) { }
 
-  ngOnInit() {
+  public ngOnInit(): void {
     this.getPropritaireNo();
     this.getCliniques();
   }

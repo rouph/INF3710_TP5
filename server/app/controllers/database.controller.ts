@@ -50,28 +50,27 @@ export class DatabaseController {
                     res.json(proprios);
                 }).catch((e: Error) => {
                     console.error(e.stack);
-                });
             });
+        });
 
         router.get("/Traitements",
-            (req: Request, res: Response, next: NextFunction) => {
-             // Send the request to the service and send the response
-             this.databaseService.getTraitements().then((result: pg.QueryResult) => {
-             const traitements: Traitement[] = result.rows.map((pro: any) => (
+                   (req: Request, res: Response, next: NextFunction) => {
+                // Send the request to the service and send the response
+                this.databaseService.getTraitements().then((result: pg.QueryResult) => {
+                const traitements: Traitement[] = result.rows.map((pro: any) => (
                  {
                      "noTraitement" : pro.notraitement,
                      "description" : pro.description,
                      "cout" : pro.cout,
              }));
-             res.json(traitements);
+                res.json(traitements);
          }).catch((e: Error) => {
              console.error(e.stack);
-         });
-     });
+            });
+        });
         router.get("/Proprios/no",
                    (req: Request, res: Response, next: NextFunction) => {
                 this.databaseService.getProprietaireNo().then((result: pg.QueryResult) => {
-                    console.log(result);
                     const cliniqueNo: string[] = result.rows.map((row: any) => row.noproprietaire);
                     res.json(cliniqueNo);
                 }).catch((e: Error) => {
@@ -112,7 +111,8 @@ export class DatabaseController {
                         const adresse: string = req.body.adresse;
                         const telNumber: string = req.body.telNumber;
                         const faxNumber: string = req.body.faxNumber;
-                        this.databaseService.createClinique(cliniqueNumber, cliniqueName, adresse, telNumber, faxNumber).then((result: pg.QueryResult) => {
+                        this.databaseService.createClinique(cliniqueNumber, cliniqueName, adresse,
+                                                            telNumber, faxNumber).then((result: pg.QueryResult) => {
                         res.json(result.rowCount);
                     }).catch((e: Error) => {
                         console.error(e.stack);
@@ -131,7 +131,8 @@ export class DatabaseController {
             const salaire: string = req.body.salaire;
             const fonction: string = req.body.fonction;
             const noClinique: string = req.body.noClinique;
-            this.databaseService.createEmploye(noEmploye, nom, adresse, dob, sex, tellNum, NAS, salaire, fonction, noClinique).then((result: pg.QueryResult) => {
+            this.databaseService.createEmploye(noEmploye, nom, adresse, dob, sex, tellNum,
+                                               NAS, salaire, fonction, noClinique).then((result: pg.QueryResult) => {
             res.json(result.rowCount);
         }).catch((e: Error) => {
             console.error(e.stack);
@@ -166,8 +167,6 @@ export class DatabaseController {
             res.json(-1);
             });
         });
-
-        
 
         router.get("/tables/:tableName",
                    (req: Request, res: Response, next: NextFunction) => {

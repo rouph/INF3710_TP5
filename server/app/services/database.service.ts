@@ -19,24 +19,17 @@ export class DatabaseService {
 
     private pool: pg.Pool = new pg.Pool(this.connectionConfig);
 
-    /*
-
-        METHODES DE DEBUG
-    */
     public createSchema(): Promise<pg.QueryResult> {
-        //this.pool.connect();
-        
+
         return this.pool.query(schema);
     }
 
     public populateDb(): Promise<pg.QueryResult> {
-       // this.pool.connect();
 
         return this.pool.query(data);
     }
 
     public getAllFromTable(tableName: string): Promise<pg.QueryResult> {
-        //this.pool.connect();
 
         return this.pool.query(`SELECT * FROM HOTELDB.${tableName};`);
     }
@@ -45,7 +38,6 @@ export class DatabaseService {
 
         return this.pool.query('SELECT * FROM tp5_schema.cliniquevet;');
     }
-
 
     public getProprios(): Promise<pg.QueryResult> {
 
@@ -64,9 +56,9 @@ export class DatabaseService {
 
         return this.pool.query('SELECT noProprietaire FROM TP5_schema.Proprietaire;');
     }
-    
-    public createClinique(cliniqueNumber: string,cliniqueName: string,
-                             adresse: string, telNumber: string, faxNumber:string): Promise<pg.QueryResult> {
+
+    public createClinique(cliniqueNumber: string, cliniqueName: string,
+                          adresse: string, telNumber: string, faxNumber: string): Promise<pg.QueryResult> {
       //  this.pool.connect();
         const values: string[] = [
             cliniqueNumber,
@@ -79,8 +71,8 @@ export class DatabaseService {
 
         return this.pool.query(queryText, values);
     }
-    public createEmploye(noEmploye: string, nom: string,adresse:string, dob: string, sex: string, tellNum: string,
-                         NAS: string, salaire: string, fonction: string,noClinique: string){
+    public createEmploye(noEmploye: string, nom: string, adresse: string, dob: string, sex: string, tellNum: string,
+                         NAS: string, salaire: string, fonction: string, noClinique: string): Promise<pg.QueryResult> {
 
             const values: string[] = [
                 noEmploye,
@@ -99,7 +91,7 @@ export class DatabaseService {
             return this.pool.query(queryText, values);
     }
 
-    public createProprio(noProprietaire: string,nom: string, adresse: string, telNumber: string): Promise<pg.QueryResult> {
+    public createProprio(noProprietaire: string, nom: string, adresse: string, telNumber: string): Promise<pg.QueryResult> {
         //  this.pool.connect();
         const values: string[] = [
         noProprietaire,
@@ -112,7 +104,7 @@ export class DatabaseService {
         return this.pool.query(queryText, values);
     }
 
-    public createTraitement(noTraitement: string,description: string, cout: string): Promise<pg.QueryResult> {
+    public createTraitement(noTraitement: string, description: string, cout: string): Promise<pg.QueryResult> {
         //  this.pool.connect();
         const values: string[] = [
         noTraitement,
@@ -123,8 +115,6 @@ export class DatabaseService {
 
         return this.pool.query(queryText, values);
     }
-
-
 
     /*
     // ROOM

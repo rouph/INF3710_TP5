@@ -1,28 +1,25 @@
-import { Component, OnInit } from '@angular/core';
-import { CommunicationService } from '../communication.service';
-import { Clinique } from '../../../../common/tables/Clinique';
+import { Component } from "@angular/core";
+import { Clinique } from "../../../../common/tables/Clinique";
+import { CommunicationService } from "../communication.service";
 
 @Component({
-  selector: 'app-clinique-vet',
-  templateUrl: './clinique-vet.component.html',
-  styleUrls: ['./clinique-vet.component.css']
+  selector: "app-clinique-vet",
+  templateUrl: "./clinique-vet.component.html",
+  styleUrls: ["./clinique-vet.component.css"]
 })
-export class CliniqueVetComponent implements OnInit {
+export class CliniqueVetComponent {
   public constructor(private communicationService: CommunicationService) { }
   public cliniques: Clinique[] = [];
 
-
   public duplicateError: boolean = false;
 
-
-  ngOnInit() {
-  }
   public getCliniques(): void {
     this.communicationService.getCliniques().subscribe((cliniques: Clinique[]) => {
         this.cliniques = cliniques;
     });
   }
-  public insertClinique(cliniqueNumber: string,cliniqueName:string, adresse: string, telNumber: string, faxNumber: string): void {
+  public insertClinique(cliniqueNumber: string, cliniqueName: string, adresse: string, telNumber: string, faxNumber: string): void {
+    // tslint:disable-next-line:no-any
     const clinique: any = {
         "cliniqueNumber" : cliniqueNumber,
         "cliniqueName" : cliniqueName,

@@ -1,14 +1,14 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
+import { concat, of, Observable, Subject } from "rxjs";
+import { catchError } from "rxjs/operators";
 import { Clinique} from "../../../common/tables/Clinique";
 import { Proprio } from "../../../common/tables/Proprio";
-// tslint:disable-next-line:ordered-imports
-import { of, Observable,concat, Subject } from "rxjs";
-import { catchError } from "rxjs/operators";
 
 @Injectable()
 export class CommunicationService {
 
+    // tslint:disable:no-any
     private readonly BASE_URL: string = "http://localhost:3000/database";
     public constructor(private http: HttpClient) { }
 
@@ -22,7 +22,6 @@ export class CommunicationService {
        this._listners.next(filterBy);
     }
 
-
     public getCliniques(): Observable<any[]> {
 
         return this.http.get<Clinique[]>(this.BASE_URL + "/Clinique").pipe(
@@ -35,7 +34,7 @@ export class CommunicationService {
             catchError(this.handleError<string[]>("getCliniqueNo")),
         );
     }
-    public getProprietaireNo():Observable<any[]> {
+    public getProprietaireNo(): Observable<any[]> {
 
         return this.http.get<string[]>(this.BASE_URL + "/Proprios/no").pipe(
             catchError(this.handleError<string[]>("getPropriosNo")),
@@ -56,7 +55,6 @@ export class CommunicationService {
         );
     }
 
-
     /*
     public getHotelPKs(): Observable<string[]> {
 
@@ -66,8 +64,8 @@ export class CommunicationService {
     }
     */
 
-    public insertClinique(Clinique: any): Observable<number> {
-        return this.http.post<number>(this.BASE_URL + "/clinique/insert", Clinique).pipe(
+    public insertClinique(clinique: any): Observable<number> {
+        return this.http.post<number>(this.BASE_URL + "/clinique/insert", clinique).pipe(
             catchError(this.handleError<number>("insertClinique")),
         );
     }
@@ -77,18 +75,17 @@ export class CommunicationService {
         );
     }
 
-    public insertProprio(Proprio: any): Observable<number> {
-        return this.http.post<number>(this.BASE_URL + "/proprio/insert", Proprio).pipe(
+    public insertProprio(proprio: any): Observable<number> {
+        return this.http.post<number>(this.BASE_URL + "/proprio/insert", proprio).pipe(
             catchError(this.handleError<number>("insertProprio")),
         );
     }
 
-    public insertTraitement(Traitement: any): Observable<number> {
-        return this.http.post<number>(this.BASE_URL + "/traitement/insert", Traitement).pipe(
+    public insertTraitement(traitement: any): Observable<number> {
+        return this.http.post<number>(this.BASE_URL + "/traitement/insert", traitement).pipe(
             catchError(this.handleError<number>("insertTraitement")),
         );
     }
-
 
     public setUpDatabase(): Observable<any> {
         return concat(this.http.post<any>(this.BASE_URL + "/createSchema", []),

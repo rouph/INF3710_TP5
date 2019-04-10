@@ -1,29 +1,25 @@
-import { Component, OnInit } from '@angular/core';
-import { CommunicationService } from '../communication.service';
-import { Traitement } from '../../../../common/tables/Traitement';
+import { Component } from "@angular/core";
+import { Traitement } from "../../../../common/tables/Traitement";
+import { CommunicationService } from "../communication.service";
 
 @Component({
-  selector: 'app-traitement',
-  templateUrl: './traitement.component.html',
-  styleUrls: ['./traitement.component.css']
+  selector: "app-traitement",
+  templateUrl: "./traitement.component.html",
+  styleUrls: ["./traitement.component.css"]
 })
-export class TraitementComponent implements OnInit {
+export class TraitementComponent {
 
   public constructor(private communicationService: CommunicationService) { }
   public traitements: Traitement[] = [];
-
-
   public duplicateError: boolean = false;
 
-
-  ngOnInit() {
-  }
   public getTraitements(): void {
     this.communicationService.getTraitements().subscribe((traitements: Traitement[]) => {
         this.traitements = traitements;
     });
 }
-  public insertTraitement(noTraitement: string,description:string, cout: number): void {
+  public insertTraitement(noTraitement: string, description: string, cout: number): void {
+    // tslint:disable-next-line:no-any
     const traitement: any = {
         "noTraitement" : noTraitement,
         "description" : description,

@@ -11,7 +11,7 @@ export class EmployeComponent implements OnInit {
   public constructor(private communicationService: CommunicationService) { }
   public duplicateError: boolean = false;
   public cliniquesNo: string[];
-  ngOnInit() {
+  public ngOnInit(): void {
     this.getCliniques();
   }
 
@@ -20,9 +20,10 @@ export class EmployeComponent implements OnInit {
         this.cliniquesNo = cliniques;
     });
   }
-  insertClinique(noEmploye: string, nom: string, adresse: string,
-                 dob: string, sex: string, tellNum: string, NAS: string, salaire: string
-                , fonction: string, noClinique: string) {
+  public insertClinique(noEmploye: string, nom: string, adresse: string,
+                        dob: string, sex: string, tellNum: string, NAS: string, salaire: string
+                ,       fonction: string, noClinique: string): void {
+            // tslint:disable-next-line:no-any
             const employe: any = {
               "noEmploye" : noEmploye,
               "nom" : nom,
