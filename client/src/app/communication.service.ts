@@ -1,6 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Clinique} from "../../../common/tables/Clinique";
+import { Proprio } from "../../../common/tables/Proprio";
 // tslint:disable-next-line:ordered-imports
 import { of, Observable,concat, Subject } from "rxjs";
 import { catchError } from "rxjs/operators";
@@ -30,6 +31,13 @@ export class CommunicationService {
         );
     }
 
+    public getProprios(): Observable<any[]> {
+
+        return this.http.get<Proprio[]>(this.BASE_URL + "/Proprios").pipe(
+            catchError(this.handleError<Proprio[]>("getProprios")),
+        );
+    }
+
     public getHotelPKs(): Observable<string[]> {
 
         return this.http.get<string[]>(this.BASE_URL + "/hotel/hotelNo").pipe(
@@ -43,7 +51,7 @@ export class CommunicationService {
         );
     }
 
-    public inserProprio(Proprio: any): Observable<number> {
+    public insertProprio(Proprio: any): Observable<number> {
         return this.http.post<number>(this.BASE_URL + "/proprio/insert", Proprio).pipe(
             catchError(this.handleError<number>("insertProprio")),
         );

@@ -18,8 +18,8 @@ export class ProprioAnimalComponent implements OnInit {
 
   ngOnInit() {
   }
-  public getCliniques(): void {
-    this.communicationService.getCliniques().subscribe((proprios: Proprio[]) => {
+  public getProprios(): void {
+    this.communicationService.getProprios().subscribe((proprios: Proprio[]) => {
         this.proprios = proprios;
     });
 }
@@ -30,7 +30,7 @@ export class ProprioAnimalComponent implements OnInit {
         "adresse" : adresse,
         "telNumber" : telNumber,
     };
-    this.communicationService.inserProprio(proprio).subscribe((res: number) => {
+    this.communicationService.insertProprio(proprio).subscribe((res: number) => {
         if (res > 0) {
             this.communicationService.filter("update");
         }
