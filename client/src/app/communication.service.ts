@@ -35,6 +35,12 @@ export class CommunicationService {
             catchError(this.handleError<string[]>("getCliniqueNo")),
         );
     }
+    public getProprietaireNo():Observable<any[]> {
+
+        return this.http.get<string[]>(this.BASE_URL + "/Proprios/no").pipe(
+            catchError(this.handleError<string[]>("getPropriosNo")),
+        );
+    }
 
     public getProprios(): Observable<any[]> {
 

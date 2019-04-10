@@ -12,8 +12,16 @@
       dob : <li><input class="form-control col-md-4" #dob></li>
       date_inscription : <li><input class="form-control col-md-4" #date_inscription></li>
       etat : <li><input class="form-control col-md-4" #etat></li>
-      noProprio : <li><input  class="form-control col-md-4" #noProprio></li>
-      CliniqueNo : <li><input class="form-control col-md-4" #CliniqueNo></li>
+      noProprio : <li>
+                    <select class="form-control col-md-4" #noClinique>
+                    <option  *ngFor="let proprioNo of propriosNo" >{{proprioNo}}</option>
+                    </select>
+                  </li>
+      CliniqueNo : <li>
+                    <select class="form-control col-md-4" #noClinique>
+                    <option  *ngFor="let cliniqueNo of cliniquesNo" >{{cliniqueNo}}</option>
+                    </select>
+                  </li>
     <li><button type="button" class="btn btn-primary" 
       (click)="insertClinique(cliniqueNo.value,cliniqueName.value, adresse.value, telNumber.value,faxNumber.value)"> Add Animal</button></li>
     </ul>

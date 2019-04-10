@@ -51,7 +51,16 @@ export class DatabaseController {
                     console.error(e.stack);
                 });
             });
-
+        router.get("/Proprios/no",
+                   (req: Request, res: Response, next: NextFunction) => {
+                this.databaseService.getProprietaireNo().then((result: pg.QueryResult) => {
+                    console.log(result);
+                    const cliniqueNo: string[] = result.rows.map((row: any) => row.noproprietaire);
+                    res.json(cliniqueNo);
+                }).catch((e: Error) => {
+                    console.error(e.stack);
+                });
+            });
         router.get("/Clinique",
                    (req: Request, res: Response, next: NextFunction) => {
                     // Send the request to the service and send the response
@@ -105,7 +114,7 @@ export class DatabaseController {
             const salaire: string = req.body.salaire;
             const fonction: string = req.body.fonction;
             const noClinique: string = req.body.noClinique;
-            this.databaseService.createEmploye(noEmploye, nom,adresse, dob, sex, tellNum, NAS, salaire, fonction, noClinique).then((result: pg.QueryResult) => {
+            this.databaseService.createEmploye(noEmploye, nom, adresse, dob, sex, tellNum, NAS, salaire, fonction, noClinique).then((result: pg.QueryResult) => {
             res.json(result.rowCount);
         }).catch((e: Error) => {
             console.error(e.stack);
@@ -114,12 +123,12 @@ export class DatabaseController {
 });
 
         router.post("/proprio/insert",
-        (req: Request, res: Response, next: NextFunction) => {
+                    (req: Request, res: Response, next: NextFunction) => {
             const noProprietaire: string = req.body.noProprietaire;
             const nom: string = req.body.nom;
             const adresse: string = req.body.adresse;
             const telNumber: string = req.body.telNumber;
-          
+
             this.databaseService.createProprio(noProprietaire, nom, adresse, telNumber).then((result: pg.QueryResult) => {
             res.json(result.rowCount);
         }).catch((e: Error) => {

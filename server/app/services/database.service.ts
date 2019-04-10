@@ -56,6 +56,10 @@ export class DatabaseService {
     public getCliniqueNo(): Promise<pg.QueryResult> {
         return this.pool.query('SELECT noClinique FROM tp5_schema.cliniquevet;');
     }
+    public getProprietaireNo(): Promise<pg.QueryResult> {
+
+        return this.pool.query('SELECT noProprietaire FROM TP5_schema.Proprietaire;');
+    }
     
     public createClinique(cliniqueNumber: string,cliniqueName: string,
                              adresse: string, telNumber: string, faxNumber:string): Promise<pg.QueryResult> {
