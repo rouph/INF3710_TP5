@@ -10,6 +10,7 @@ import { CommunicationService } from "./communication.service";
 import { ProprioAnimalComponent } from './proprio-animal/proprio-animal.component';
 import { EmployeComponent } from './employe/employe.component';
 import { AnimalComponent } from './animal/animal.component';
+import { TraitementComponent } from './traitement/traitement.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { AnimalComponent } from './animal/animal.component';
     ProprioAnimalComponent,
     EmployeComponent,
     AnimalComponent,
+    TraitementComponent,
   ],
   imports: [
     CommonModule,
