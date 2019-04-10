@@ -11,7 +11,7 @@ export class DatabaseService {
     // A MODIFIER POUR VOTRE BD
     public connectionConfig: pg.ConnectionConfig = {
         user: "admin",
-        database: "hotelDB",
+        database: "pg_exemple",
         password: "admin",
         port: 5432,
         host: "127.0.0.1",
@@ -54,15 +54,18 @@ export class DatabaseService {
 
         return this.pool.query('SELECT hotelNo FROM HOTELDB.Hotel;');
     }
-
-    public createHotel(hotelNo: string, hotelName: string, city: string): Promise<pg.QueryResult> {
+    
+    public createClinique(cliniqueNumber: string,cliniqueName: string,
+                             adresse: string, telNumber: string, faxNumber:string): Promise<pg.QueryResult> {
       //  this.pool.connect();
         const values: string[] = [
-            hotelNo,
-            hotelName,
-            city
+            cliniqueNumber,
+            cliniqueName,
+            adresse,
+            telNumber,
+            faxNumber,
         ];
-        const queryText: string = `INSERT INTO HOTELDB.Hotel VALUES($1, $2, $3);`;
+        const queryText: string = `INSERT INTO TP5_schema.CliniqueVet VALUES($1, $2, $3, $4, $5);`;
 
         return this.pool.query(queryText, values);
     }

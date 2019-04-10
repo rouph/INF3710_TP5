@@ -37,9 +37,9 @@ export class CommunicationService {
         );
     }
 
-    public insertHotel(hotel: any): Observable<number> {
-        return this.http.post<number>(this.BASE_URL + "/hotel/insert", hotel).pipe(
-            catchError(this.handleError<number>("inserHotel")),
+    public insertClinique(Clinique: any): Observable<number> {
+        return this.http.post<number>(this.BASE_URL + "/clinique/insert", Clinique).pipe(
+            catchError(this.handleError<number>("insertClinique")),
         );
     }
 

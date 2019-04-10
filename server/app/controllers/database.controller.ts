@@ -60,13 +60,14 @@ export class DatabaseController {
                         console.error(e.stack);
                     });
                   });
-
-        router.post("/hotel/insert",
+        router.post("/clinique/insert",
                     (req: Request, res: Response, next: NextFunction) => {
-                        const hotelNo: string = req.body.hotelNo;
-                        const hotelName: string = req.body.hotelName;
-                        const city: string = req.body.city;
-                        this.databaseService.createHotel(hotelNo, hotelName, city).then((result: pg.QueryResult) => {
+                        const cliniqueNumber: string = req.body.cliniqueNumber;
+                        const cliniqueName: string = req.body.cliniqueName;
+                        const adresse: string = req.body.adresse;
+                        const telNumber: string = req.body.telNumber;
+                        const faxNumber: string = req.body.faxNumber;
+                        this.databaseService.createClinique(cliniqueNumber, cliniqueName, adresse, telNumber, faxNumber).then((result: pg.QueryResult) => {
                         res.json(result.rowCount);
                     }).catch((e: Error) => {
                         console.error(e.stack);

@@ -1,16 +1,17 @@
 
 <div id="hotel" style="text-align: left">
-  <h1> Hotels</h1>
+  <h1> Cliniques</h1>
   <div id="error" class="alert alert-danger" role="alert" *ngIf="duplicateError">
     Insertion sur une cle primaire qui existe deja
   </div>
     <ul style="list-style: none;">
       CliniqueNo : <li><input class="form-control col-md-4" #cliniqueNo></li>
+      cliniqueName : <li><input class="form-control col-md-4" #cliniqueName></li>
       Clinique Adresse : <li><input class="form-control col-md-4" #adresse></li>
       Tel number : <li><input  class="form-control col-md-4" #telNumber></li>
       Fax number : <li><input  class="form-control col-md-4" #faxNumber></li>
     <li><button type="button" class="btn btn-primary" 
-      (click)="insertClinique(cliniqueNo.value,adresse.value, telNumber.value,faxNumber.value)"> Add Clinique</button></li>
+      (click)="insertClinique(cliniqueNo.value,cliniqueName.value, adresse.value, telNumber.value,faxNumber.value)"> Add Clinique</button></li>
     </ul>
    
   </div>

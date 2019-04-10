@@ -7,23 +7,24 @@ import { CommunicationService } from '../communication.service';
   styleUrls: ['./clinique-vet.component.css']
 })
 export class CliniqueVetComponent implements OnInit {
-
-  
-  ngOnInit() {
-  }
   public constructor(private communicationService: CommunicationService) { }
 
 
   public duplicateError: boolean = false;
 
-  public insertClinique(cliniqueNumber: string, adresse: string, telNumber: string, faxNumber: string): void {
+
+  ngOnInit() {
+  }
+
+  public insertClinique(cliniqueNumber: string,cliniqueName:string, adresse: string, telNumber: string, faxNumber: string): void {
     const clinique: any = {
         "cliniqueNumber" : cliniqueNumber,
+        "cliniqueName" : cliniqueName,
         "adresse" : adresse,
         "telNumber" : telNumber,
         "faxNumber" : faxNumber,
     };
-    this.communicationService.insertHotel(clinique).subscribe((res: number) => {
+    this.communicationService.insertClinique(clinique).subscribe((res: number) => {
         if (res > 0) {
             this.communicationService.filter("update");
         }
