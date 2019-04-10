@@ -69,7 +69,6 @@ export class DatabaseController {
                     console.error(e.stack);
                 });
             });
-<<<<<<< HEAD
         router.get("/Clinique/no",
                    (req: Request, res: Response, next: NextFunction) => {
             this.databaseService.getCliniqueNo().then((result: pg.QueryResult) => {
@@ -79,20 +78,7 @@ export class DatabaseController {
               console.error(e.stack);
           });
      });
-=======
 
-        /*
-        router.get("/hotel/hotelNo",
-                   (req: Request, res: Response, next: NextFunction) => {
-                      this.databaseService.getHotelNo().then((result: pg.QueryResult) => {
-                        const hotelPKs: string[] = result.rows.map((row: any) => row.hotelno);
-                        res.json(hotelPKs);
-                      }).catch((e: Error) => {
-                        console.error(e.stack);
-                    });
-                  });
-        */        
->>>>>>> e9a3e8656ebc48ba197c8278b3016f1ad2163aa8
         router.post("/clinique/insert",
                     (req: Request, res: Response, next: NextFunction) => {
                         const cliniqueNumber: string = req.body.cliniqueNumber;

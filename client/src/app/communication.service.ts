@@ -5,7 +5,6 @@ import { Proprio } from "../../../common/tables/Proprio";
 // tslint:disable-next-line:ordered-imports
 import { of, Observable,concat, Subject } from "rxjs";
 import { catchError } from "rxjs/operators";
-import { Room } from "../../../common/tables/Room";
 
 @Injectable()
 export class CommunicationService {
