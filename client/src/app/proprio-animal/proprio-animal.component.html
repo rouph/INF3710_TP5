@@ -16,7 +16,7 @@
 
   <div id="ht" style="text-align:center" *ngIf="route != '/room'">
     <button type="button" class="btn btn-primary" (click)="getProprios()">Get Proprios</button>
-    <table id ="ht" align="center" border="1" width="350">
+    <table id ="ht" align="center" border="1" width="95%">
       <thead>
         <th> NO PROPRIO</th>
         <th> NOM</th>
@@ -24,7 +24,7 @@
         <th> NUM TEL</th>
       </thead>
       <tbody>
-        <tr *ngFor="let clinique of cliniques">
+        <tr *ngFor="let proprio of proprios">
           <td> {{proprio.noProprietaire}}</td>
           <td> {{proprio.nom}}</td>
           <td> {{proprio.adresse}}</td>
