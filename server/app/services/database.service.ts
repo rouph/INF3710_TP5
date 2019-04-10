@@ -47,19 +47,13 @@ export class DatabaseService {
         return this.pool.query('SELECT * FROM tp5_schema.cliniquevet;');
     }
 
-<<<<<<< HEAD
-    public getCliniqueNo(): Promise<pg.QueryResult> {
-=======
+
     public getProprios(): Promise<pg.QueryResult> {
 
         return this.pool.query('SELECT * FROM TP5_schema.Proprietaire;');
     }
-
-
-    public getHotelNo(): Promise<pg.QueryResult> {
->>>>>>> e9a3e8656ebc48ba197c8278b3016f1ad2163aa8
        // this.pool.connect();
-
+    public getCliniqueNo(): Promise<pg.QueryResult> {
         return this.pool.query('SELECT noClinique FROM tp5_schema.cliniquevet;');
     }
     
