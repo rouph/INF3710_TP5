@@ -5,7 +5,6 @@ import { Proprio } from "../../../common/tables/Proprio";
 // tslint:disable-next-line:ordered-imports
 import { of, Observable,concat, Subject } from "rxjs";
 import { catchError } from "rxjs/operators";
-import { Room } from "../../../common/tables/Room";
 
 @Injectable()
 export class CommunicationService {
@@ -30,6 +29,12 @@ export class CommunicationService {
             catchError(this.handleError<Clinique[]>("getClinique")),
         );
     }
+    public getCliniquesNumber(): Observable<any[]> {
+
+        return this.http.get<string[]>(this.BASE_URL + "/Clinique/no").pipe(
+            catchError(this.handleError<string[]>("getCliniqueNo")),
+        );
+    }
 
     public getProprios(): Observable<any[]> {
 
@@ -50,6 +55,11 @@ export class CommunicationService {
     public insertClinique(Clinique: any): Observable<number> {
         return this.http.post<number>(this.BASE_URL + "/clinique/insert", Clinique).pipe(
             catchError(this.handleError<number>("insertClinique")),
+        );
+    }
+    public insertEmploye(employe: any): Observable<number> {
+        return this.http.post<number>(this.BASE_URL + "/employe/insert", employe).pipe(
+            catchError(this.handleError<number>("insertEmploye")),
         );
     }
 
