@@ -2,7 +2,8 @@ import { NextFunction, Request, Response, Router } from "express";
 import { inject, injectable } from "inversify";
 import * as pg from "pg";
 
-import {Hotel} from "../../../common/tables/Clinique";
+import {Clinique} from "../../../common/tables/Clinique";
+import {Proprio} from "../../../common/tables/Proprio";
 import {Room} from '../../../common/tables/Room';
 
 import { DatabaseService } from "../services/database.service";
@@ -35,11 +36,28 @@ export class DatabaseController {
                     });
         });
 
+        router.get("/Proprios",
+                   (req: Request, res: Response, next: NextFunction) => {
+                    // Send the request to the service and send the response
+                    this.databaseService.getProprios().then((result: pg.QueryResult) => {
+                    const proprios: Proprio[] = result.rows.map((pro: any) => (
+                        {
+                            "noProprietaire" : pro.noproprietaire,
+                            "nom" : pro.nom,
+                            "adresse" : pro.adresse,
+                            "telNumber" : pro.numtel,
+                    }));
+                    res.json(proprios);
+                }).catch((e: Error) => {
+                    console.error(e.stack);
+                });
+            });
+
         router.get("/Clinique",
                    (req: Request, res: Response, next: NextFunction) => {
                     // Send the request to the service and send the response
                     this.databaseService.getCliniques().then((result: pg.QueryResult) => {
-                    const cliniques: Hotel[] = result.rows.map((cli: any) => (
+                    const cliniques: Clinique[] = result.rows.map((cli: any) => (
                         {
                             "cliniqueNumber" : cli.noclinique,
                             "cliniqueName" : cli.nom,
@@ -76,6 +94,21 @@ export class DatabaseController {
                         res.json(-1);
                     });
         });
+
+        router.post("/proprio/insert",
+        (req: Request, res: Response, next: NextFunction) => {
+            const noProprietaire: string = req.body.noProprietaire;
+            const nom: string = req.body.nom;
+            const adresse: string = req.body.adresse;
+            const telNumber: string = req.body.telNumber;
+          
+            this.databaseService.createProprio(noProprietaire, nom, adresse, telNumber).then((result: pg.QueryResult) => {
+            res.json(result.rowCount);
+        }).catch((e: Error) => {
+            console.error(e.stack);
+            res.json(-1);
+        });
+});
 
         router.get("/rooms",
                    (req: Request, res: Response, next: NextFunction) => {
