@@ -6,6 +6,7 @@ import { Animal } from "../../../common/tables/Animal";
 import { Clinique} from "../../../common/tables/Clinique";
 import { Employe } from "../../../common/tables/Employe";
 import { Proprio } from "../../../common/tables/Proprio";
+import { Traitement } from "../../../common/tables/Traitement";
 
 @Injectable()
 export class CommunicationService {
@@ -52,8 +53,8 @@ export class CommunicationService {
 
     public getTraitements(): Observable<any[]> {
 
-        return this.http.get<Proprio[]>(this.BASE_URL + "/Traitements").pipe(
-            catchError(this.handleError<Proprio[]>("getTraitements")),
+        return this.http.get<Traitement[]>(this.BASE_URL + "/Traitements").pipe(
+            catchError(this.handleError<Traitement[]>("getTraitements")),
         );
     }
 
@@ -78,14 +79,13 @@ export class CommunicationService {
         );
     }
 
-    /*
-    public getHotelPKs(): Observable<string[]> {
+    public getTraitementsFFK(noAnimal: string, noClinique: string): Observable<any[]> {
 
-        return this.http.get<string[]>(this.BASE_URL + "/hotel/hotelNo").pipe(
-            catchError(this.handleError<string[]>("getHotelPKs")),
+        return this.http.get<Traitement[]>(this.BASE_URL + "/TraitementsFFK",
+                                           {params: {noAnimal_: noAnimal, noClinique_: noClinique }}).pipe(
+            catchError(this.handleError<Traitement[]>("getTraitementsFFK")),
         );
     }
-    */
 
     public insertClinique(clinique: any): Observable<number> {
         return this.http.post<number>(this.BASE_URL + "/clinique/insert", clinique).pipe(

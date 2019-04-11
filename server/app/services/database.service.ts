@@ -70,6 +70,23 @@ export class DatabaseService {
         return this.pool.query(query);
     }
 
+    public getTraitementsFFK(noAnimal: string, noClinique: string): Promise<pg.QueryResult> {
+        let query: string = '';
+        console.log(noAnimal);
+        console.log(noClinique);
+        query += "SELECT * FROM TP5_schema.Traitement WHERE noTraitement IN ( SELECT noTraitement ";
+        query += "FROM TP5_schema.PropositionTraitement WHERE noExamen IN ( SELECT noExamen ";
+        query += "FROM TP5_schema.Examen WHERE noAnimal = ( SELECT noAnimal FROM TP5_schema.Examen ";
+        query += "WHERE noAnimal='";
+        query += noAnimal;
+        query += "' AND noCLinique = '";
+        query += noClinique;
+        query += "')));";
+        console.log(query);
+
+        return this.pool.query(query);
+    }
+
     public getCliniqueNo(): Promise<pg.QueryResult> {
         return this.pool.query('SELECT noClinique FROM tp5_schema.cliniquevet;');
     }

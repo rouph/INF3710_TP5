@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { Animal } from "../../../../common/tables/Animal";
+import { Traitement } from "../../../../common/tables/Traitement";
 import { CommunicationService } from "../communication.service";
 
 @Component({
@@ -13,6 +14,7 @@ export class AnimalComponent implements OnInit {
   public duplicateError: boolean = false;
   public animals: Animal[] = [];
   public animalsFN: Animal[] = [];
+  public traitements: Traitement[] = [];
 
   public constructor(private communicationService: CommunicationService) { }
 
@@ -66,4 +68,11 @@ export class AnimalComponent implements OnInit {
         this.animalsFN = animalsFN;
     });
   }
+
+  public getTraitementsFFK(noAnimal: string, noClinique: string): void {
+    this.communicationService.getTraitementsFFK(noAnimal, noClinique).subscribe((traitement: Traitement[]) => {
+        this.traitements = traitement;
+    });
+  }
+
 }

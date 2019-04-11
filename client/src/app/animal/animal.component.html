@@ -69,11 +69,11 @@
   <h4 style="text-align: left"> Note: si rien ne sort, c'est que votre animal n'est pas dans notre base de données! </h4>
   <div id="hotel" style="text-align: left">
     <ul style="list-style: none;">
-      nom : <li><input class="form-control col-md-4" #nom></li>
+      nom : <li><input class="form-control col-md-4" #nomFN></li>
     </ul>
   </div>
   <div id="ht" style="text-align:center" *ngIf="route != '/room'">
-    <button type="button" class="btn btn-primary" (click)="getAnimalsFromName(nom.value)">Get Animal from name </button>
+    <button type="button" class="btn btn-primary" (click)="getAnimalsFromName(nomFN.value)">Get Animal from name </button>
     <table id ="ht" align="center" border="1" width="95%">
       <thead>
         <th> NOANIMAL</th>
@@ -97,6 +97,39 @@
           <td> {{animalFN.etat}}</td>
           <td> {{animalFN.noProprio}}</td>
           <td> {{animalFN.noClinique}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <h1 style="text-align: left"> Traitements d'un animal à partir de sa clé primaire </h1>
+  <div id="hotel" style="text-align: left">
+    <ul style="list-style: none;">
+      noAnimal : <li><input class="form-control col-md-4" #noAnimalQ2></li>
+      noClinique : <li><input class="form-control col-md-4" #noCliniqueQ2></li>
+    </ul>
+  </div>
+  <div id="ht" style="text-align:center" *ngIf="route != '/room'">
+    <button type="button" class="btn btn-primary" (click)="getTraitementsFFK(noAnimalQ2.value, noCliniqueQ2.value)">Get Animal from name </button>
+    <table id ="ht" align="center" border="1" width="95%">
+      <thead>
+        <th> NO TRAITEMENT</th>
+        <th> DESCRIPTION</th>
+        <th> COUT</th>
+      </thead>
+      <tbody>
+        <tr *ngFor="let traitement of traitements">
+          <td> {{traitement.noTraitement}}</td>
+          <td> {{traitement.description}}</td>
+          <td> {{traitement.cout}}</td>
         </tr>
       </tbody>
     </table>

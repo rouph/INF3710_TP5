@@ -71,6 +71,22 @@ export class DatabaseController {
             });
         });
 
+        router.get("/TraitementsFFK",
+                   (req: Request, res: Response, next: NextFunction) => {
+                // Send the request to the service and send the response
+                this.databaseService.getTraitementsFFK(req.query.noAnimal_, req.query.noClinique_).then((result: pg.QueryResult) => {
+                const traitements: Traitement[] = result.rows.map((tra: any) => (
+                 {
+                     "noTraitement" : tra.notraitement,
+                     "description" : tra.description,
+                     "cout" : tra.cout,
+             }));
+             res.json(traitements);
+         }).catch((e: Error) => {
+             console.error(e.stack);
+            });
+        });
+
         router.get("/Employees",
                    (req: Request, res: Response, next: NextFunction) => {
                 // Send the request to the service and send the response
