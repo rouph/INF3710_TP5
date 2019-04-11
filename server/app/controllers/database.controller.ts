@@ -2,6 +2,7 @@ import { NextFunction, Request, Response, Router } from "express";
 import { inject, injectable } from "inversify";
 import * as pg from "pg";
 
+import { Animal } from "../../../common/tables/Animal";
 import {Clinique} from "../../../common/tables/Clinique";
 import {Employe} from "../../../common/tables/Employe";
 import {Proprio} from "../../../common/tables/Proprio";
@@ -92,6 +93,30 @@ export class DatabaseController {
              console.error(e.stack);
             });
         });
+
+        router.get("/Animals",
+                   (req: Request, res: Response, next: NextFunction) => {
+                // Send the request to the service and send the response
+                this.databaseService.getAnimals().then((result: pg.QueryResult) => {
+                const traitements: Animal[] = result.rows.map((ani: any) => (
+                 {
+                    "noAnimal" : ani.noanimal,
+                    "nom" : ani.nom,
+                    "type" : ani.type_,
+                    "description" : ani.description,
+                    "dob" : ani.dob,
+                    "date_inscription" : ani.date_inscription,
+                    "etat" : ani.etat,
+                    "noProprio" : ani.noproprietaire,
+                    "noClinique" : ani.noclinique,
+             }));
+             console.log(result);
+                res.json(traitements);
+         }).catch((e: Error) => {
+             console.error(e.stack);
+            });
+        });
+
         router.get("/Proprios/no",
                    (req: Request, res: Response, next: NextFunction) => {
                 this.databaseService.getProprietaireNo().then((result: pg.QueryResult) => {
@@ -173,6 +198,27 @@ export class DatabaseController {
             const telNumber: string = req.body.telNumber;
 
             this.databaseService.createProprio(noProprietaire, nom, adresse, telNumber).then((result: pg.QueryResult) => {
+            res.json(result.rowCount);
+        }).catch((e: Error) => {
+            console.error(e.stack);
+            res.json(-1);
+            });
+        });
+
+        router.post("/animal/insert",
+                    (req: Request, res: Response, next: NextFunction) => {
+            const noAnimal: string = req.body.noAnimal;
+            const nom: string = req.body.nom;
+            const type: string = req.body.type;
+            const description: string = req.body.description;
+            const dob: string = req.body.dob;
+            const date_inscription: string = req.body.date_inscription;
+            const etat: string = req.body.etat;
+            const noProprio: string = req.body.noProprio;
+            const noClinique: string = req.body.noClinique;
+
+            this.databaseService.createAnimal(noAnimal, nom, type, description, dob, date_inscription,
+                                              etat, noProprio, noClinique).then((result: pg.QueryResult) => {
             res.json(result.rowCount);
         }).catch((e: Error) => {
             console.error(e.stack);

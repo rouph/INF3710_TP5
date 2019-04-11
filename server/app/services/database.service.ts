@@ -53,6 +53,11 @@ export class DatabaseService {
 
         return this.pool.query('SELECT * FROM TP5_schema.Employe;');
     }
+
+    public getAnimals(): Promise<pg.QueryResult> {
+
+        return this.pool.query('SELECT * FROM TP5_schema.Animal;');
+    }
        // this.pool.connect();
     public getCliniqueNo(): Promise<pg.QueryResult> {
         return this.pool.query('SELECT noClinique FROM tp5_schema.cliniquevet;');
@@ -105,6 +110,18 @@ export class DatabaseService {
         telNumber,
         ];
         const queryText: string = `INSERT INTO TP5_schema.Proprietaire VALUES($1, $2, $3, $4);`;
+
+        return this.pool.query(queryText, values);
+    }
+
+    public createAnimal(noAnimal: string, nom: string, type: string, description: string, dob: string, date_inscription: string,
+                        etat: string, noProprio: string, noClinique: string): Promise<pg.QueryResult> {
+        //  this.pool.connect();
+        const values: string[] = [
+            noAnimal, nom, type, description, dob, date_inscription,
+            etat, noProprio, noClinique
+        ];
+        const queryText: string = `INSERT INTO TP5_schema.Animal VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9);`;
 
         return this.pool.query(queryText, values);
     }

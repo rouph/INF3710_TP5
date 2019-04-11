@@ -5,6 +5,7 @@ import { catchError } from "rxjs/operators";
 import { Clinique} from "../../../common/tables/Clinique";
 import { Employe } from "../../../common/tables/Employe";
 import { Proprio } from "../../../common/tables/Proprio";
+import { Animal } from "../../../common/tables/Animal";
 
 @Injectable()
 export class CommunicationService {
@@ -63,6 +64,13 @@ export class CommunicationService {
         );
     }
 
+    public getAnimals(): Observable<any[]> {
+
+        return this.http.get<Animal[]>(this.BASE_URL + "/Animals").pipe(
+            catchError(this.handleError<Proprio[]>("getAnimals")),
+        );
+    }
+
     /*
     public getHotelPKs(): Observable<string[]> {
 
@@ -92,6 +100,12 @@ export class CommunicationService {
     public insertTraitement(traitement: any): Observable<number> {
         return this.http.post<number>(this.BASE_URL + "/traitement/insert", traitement).pipe(
             catchError(this.handleError<number>("insertTraitement")),
+        );
+    }
+
+    public insertAnimal(animal: any): Observable<number> {
+        return this.http.post<number>(this.BASE_URL + "/animal/insert", animal).pipe(
+            catchError(this.handleError<number>("insertAnimal")),
         );
     }
 

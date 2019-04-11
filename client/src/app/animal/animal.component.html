@@ -13,7 +13,7 @@
       date_inscription : <li><input class="form-control col-md-4" #date_inscription></li>
       etat : <li><input class="form-control col-md-4" #etat></li>
       noProprio : <li>
-                    <select class="form-control col-md-4" #noClinique>
+                    <select class="form-control col-md-4" #noProprio>
                     <option  *ngFor="let proprioNo of propriosNo" >{{proprioNo}}</option>
                     </select>
                   </li>
@@ -23,12 +23,14 @@
                     </select>
                   </li>
     <li><button type="button" class="btn btn-primary" 
-      (click)="insertClinique(cliniqueNo.value,cliniqueName.value, adresse.value, telNumber.value,faxNumber.value)"> Add Animal</button></li>
+      (click)="insertAnimal(noAnimal.value,nom.value, type.value, description.value,
+                            dob.value, date_inscription.value, etat.value, 
+                            noProprio.value, noClinique.value )"> Add Animal</button></li>
     </ul>
   </div>
 
   <div id="ht" style="text-align:center" *ngIf="route != '/room'">
-    <button type="button" class="btn btn-primary" (click)="getCliniques()">Get Animals</button>
+    <button type="button" class="btn btn-primary" (click)="getAnimals()">Get Animals</button>
     <table id ="ht" align="center" border="1" width="95%">
       <thead>
         <th> NOANIMAL</th>
@@ -42,12 +44,16 @@
         <th> CLINIQUENO</th>
       </thead>
       <tbody>
-        <tr *ngFor="let clinique of cliniques">
-          <td> {{clinique.cliniqueNumber}}</td>
-          <td> {{clinique.cliniqueName}}</td>
-          <td> {{clinique.adresse}}</td>
-          <td> {{clinique.telNumber}}</td>
-          <td> {{clinique.faxNumber}} </td>
+        <tr *ngFor="let animal of animals">
+          <td> {{animal.noAnimal}}</td>
+          <td> {{animal.nom}}</td>
+          <td> {{animal.type}}</td>
+          <td> {{animal.description}}</td>
+          <td> {{animal.dob}} </td>
+          <td> {{animal.date_inscription}}</td>
+          <td> {{animal.etat}}</td>
+          <td> {{animal.noProprio}}</td>
+          <td> {{animal.noClinique}}</td>
         </tr>
       </tbody>
     </table>
