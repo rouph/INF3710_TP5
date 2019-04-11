@@ -58,4 +58,46 @@
       </tbody>
     </table>
   </div>
+
+
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <h1 style="text-align: left"> Animal from name </h1>
+  <div id="hotel" style="text-align: left">
+    <ul style="list-style: none;">
+      nom : <li><input class="form-control col-md-4" #nom></li>
+    </ul>
+  </div>
+  <div id="ht" style="text-align:center" *ngIf="route != '/room'">
+    <button type="button" class="btn btn-primary" (click)="getAnimalsFromName(nom.value)">Get Animal from name </button>
+    <table id ="ht" align="center" border="1" width="95%">
+      <thead>
+        <th> NOANIMAL</th>
+        <th> NOM</th>
+        <th> TYPE</th>
+        <th> DESCRIPTION</th>
+        <th> DOB</th>
+        <th> DATE_INSCRIPTION</th>
+        <th> ETAT</th>
+        <th> NOPROPRIO</th>
+        <th> CLINIQUENO</th>
+      </thead>
+      <tbody>
+        <tr *ngFor="let animalFN of animalsFN">
+          <td> {{animalFN.noAnimal}}</td>
+          <td> {{animalFN.nom}}</td>
+          <td> {{animalFN.type}}</td>
+          <td> {{animalFN.description}}</td>
+          <td> {{animalFN.dob}} </td>
+          <td> {{animalFN.date_inscription}}</td>
+          <td> {{animalFN.etat}}</td>
+          <td> {{animalFN.noProprio}}</td>
+          <td> {{animalFN.noClinique}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
   

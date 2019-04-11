@@ -98,7 +98,7 @@ export class DatabaseController {
                    (req: Request, res: Response, next: NextFunction) => {
                 // Send the request to the service and send the response
                 this.databaseService.getAnimals().then((result: pg.QueryResult) => {
-                const traitements: Animal[] = result.rows.map((ani: any) => (
+                const animals: Animal[] = result.rows.map((ani: any) => (
                  {
                     "noAnimal" : ani.noanimal,
                     "nom" : ani.nom,
@@ -110,11 +110,32 @@ export class DatabaseController {
                     "noProprio" : ani.noproprietaire,
                     "noClinique" : ani.noclinique,
              }));
-             console.log(result);
-                res.json(traitements);
+                res.json(animals);
          }).catch((e: Error) => {
              console.error(e.stack);
             });
+        });
+
+        router.get("/AnimalsFromName",
+                   (req: Request, res: Response, next: NextFunction) => {
+                    // Send the request to the service and send the response
+                    this.databaseService.getAnimalsFromName(req.query.nom_).then((result: pg.QueryResult) => {
+                    const animalsFromName: Animal[] = result.rows.map((ani: any) => (
+                    {
+                        "noAnimal" : ani.noanimal,
+                        "nom" : ani.nom,
+                        "type" : ani.type_,
+                        "description" : ani.description,
+                        "dob" : ani.dob,
+                        "date_inscription" : ani.date_inscription,
+                        "etat" : ani.etat,
+                        "noProprio" : ani.noproprietaire,
+                        "noClinique" : ani.noclinique,
+                    }));
+                    res.json(animalsFromName);
+                    }).catch((e: Error) => {
+                    console.error(e.stack);
+                    });
         });
 
         router.get("/Proprios/no",

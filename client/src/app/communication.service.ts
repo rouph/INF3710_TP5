@@ -2,10 +2,10 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { concat, of, Observable, Subject } from "rxjs";
 import { catchError } from "rxjs/operators";
+import { Animal } from "../../../common/tables/Animal";
 import { Clinique} from "../../../common/tables/Clinique";
 import { Employe } from "../../../common/tables/Employe";
 import { Proprio } from "../../../common/tables/Proprio";
-import { Animal } from "../../../common/tables/Animal";
 
 @Injectable()
 export class CommunicationService {
@@ -68,6 +68,13 @@ export class CommunicationService {
 
         return this.http.get<Animal[]>(this.BASE_URL + "/Animals").pipe(
             catchError(this.handleError<Proprio[]>("getAnimals")),
+        );
+    }
+
+    public getAnimalsFromName(nom: string): Observable<any[]> {
+
+        return this.http.get<Animal[]>(this.BASE_URL + "/AnimalsFromName", {params: {nom_: nom}}).pipe(
+            catchError(this.handleError<Proprio[]>("getAnimalsFromName")),
         );
     }
 

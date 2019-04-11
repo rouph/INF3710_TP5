@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
-import { CommunicationService } from "../communication.service";
 import { Animal } from "../../../../common/tables/Animal";
+import { CommunicationService } from "../communication.service";
 
 @Component({
   selector: "app-animal",
@@ -10,9 +10,9 @@ import { Animal } from "../../../../common/tables/Animal";
 export class AnimalComponent implements OnInit {
   public propriosNo: string[];
   public cliniquesNo: string[];
-
+  public duplicateError: boolean = false;
   public animals: Animal[] = [];
-
+  public animalsFN: Animal[] = [];
 
   public constructor(private communicationService: CommunicationService) { }
 
@@ -58,6 +58,12 @@ export class AnimalComponent implements OnInit {
   public getAnimals(): void {
     this.communicationService.getAnimals().subscribe((animals: Animal[]) => {
         this.animals = animals;
+    });
+  }
+
+  public getAnimalsFromName(nom: string): void {
+    this.communicationService.getAnimalsFromName(nom).subscribe((animalsFN: Animal[]) => {
+        this.animalsFN = animalsFN;
     });
   }
 }

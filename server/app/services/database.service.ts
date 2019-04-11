@@ -58,7 +58,18 @@ export class DatabaseService {
 
         return this.pool.query('SELECT * FROM TP5_schema.Animal;');
     }
-       // this.pool.connect();
+
+    public getAnimalsFromName(nom: string): Promise<pg.QueryResult> {
+        console.log(nom);
+        let query: string = '';
+        query += "SELECT * FROM TP5_schema.Animal WHERE LOWER(nom) LIKE LOWER('%";
+        query += nom;
+        query += "%');";
+        console.log(query);
+
+        return this.pool.query(query);
+    }
+
     public getCliniqueNo(): Promise<pg.QueryResult> {
         return this.pool.query('SELECT noClinique FROM tp5_schema.cliniquevet;');
     }
@@ -102,7 +113,6 @@ export class DatabaseService {
     }
 
     public createProprio(noProprietaire: string, nom: string, adresse: string, telNumber: string): Promise<pg.QueryResult> {
-        //  this.pool.connect();
         const values: string[] = [
         noProprietaire,
         nom,
@@ -116,7 +126,6 @@ export class DatabaseService {
 
     public createAnimal(noAnimal: string, nom: string, type: string, description: string, dob: string, date_inscription: string,
                         etat: string, noProprio: string, noClinique: string): Promise<pg.QueryResult> {
-        //  this.pool.connect();
         const values: string[] = [
             noAnimal, nom, type, description, dob, date_inscription,
             etat, noProprio, noClinique
@@ -127,7 +136,6 @@ export class DatabaseService {
     }
 
     public createTraitement(noTraitement: string, description: string, cout: string): Promise<pg.QueryResult> {
-        //  this.pool.connect();
         const values: string[] = [
         noTraitement,
         description,
@@ -138,66 +146,4 @@ export class DatabaseService {
         return this.pool.query(queryText, values);
     }
 
-    /*
-    // ROOM
-    public getRoomFromHotel(hotelNo: string, roomType: string, price: number): Promise<pg.QueryResult> {
-       // this.pool.connect();
-
-        let query: string =
-        `SELECT * FROM HOTELDB.room
-        WHERE hotelno=\'${hotelNo}\'`;
-        if (roomType !== undefined) {
-            query = query.concat('AND ');
-            query = query.concat(`typeroom=\'${roomType}\'`);
-        }
-        if (price !== undefined) {
-            query = query.concat('AND ');
-            query = query.concat(`price =\'${price}\'`);
-        }
-        console.log(query);
-
-        return this.pool.query(query);
-    }
-
-    public getRoomFromHotelParams(params: object): Promise<pg.QueryResult> {
-      //  this.pool.connect();
-
-        let query: string = 'SELECT * FROM HOTELDB.room \n';
-        const keys: string[] = Object.keys(params);
-        if (keys.length > 0) {
-            query = query.concat(`WHERE ${keys[0]} =\'${params[keys[0]]}\'`);
-        }
-
-        // On enleve le premier element
-        keys.shift();
-
-        // tslint:disable-next-line:forin
-        for (const param in keys) {
-            const value: string = keys[param];
-            query = query.concat(`AND ${value} = \'${params[value]}\'`);
-            if (param === 'price') {
-                query = query.replace('\'', '');
-            }
-        }
-
-        console.log(query);
-
-        return this.pool.query(query);
-
-    }
-
-    public createRoom(room: Room): Promise<pg.QueryResult> {
-      //  this.pool.connect();
-        const values: string[] = [
-            room.roomno,
-            room.hotelno,
-            room.typeroom,
-            room.price.toString()
-        ];
-        const queryText: string = `INSERT INTO HOTELDB.ROOM VALUES($1,$2,$3,$4);`;
-
-        return this.pool.query(queryText, values);
-    }
-
-    */
 }
