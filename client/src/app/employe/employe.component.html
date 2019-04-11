@@ -33,28 +33,38 @@
                           </select>
                       </li>
       <li><button type="button" class="btn btn-primary" 
-        (click)="insertClinique(noEmploye.value,nom.value, 
+        (click)="insertEmploye(noEmploye.value,nom.value, 
                           adresse.value, dob.value,sex.value,tellNum.value,NAS.value,salaire.value,fonction.value,noClinique.value)"> Add Employé</button></li>
       </ul>
     </div>
   
     <div id="ht" style="text-align:center" *ngIf="route != '/room'">
-      <button type="button" class="btn btn-primary" (click)="getCliniques()">Get Cliniques</button>
+      <button type="button" class="btn btn-primary" (click)="getEmployees()">Get Employees</button>
       <table id ="ht" align="center" border="1" width="95%">
         <thead>
-          <th> CLINIQUE NO</th>
+          <th> NO EMPLOYE</th>
           <th> NOM</th>
           <th> ADRESSE</th>
+          <th> DOB</th>
+          <th> SEX</th>
           <th> TELL NUM</th>
-          <th> FAX</th>
+          <th> NAS</th>
+          <th> SALAIRE</th>
+          <th> FONCTION</th>
+          <th> NO CLINIQUE</th>
         </thead>
         <tbody>
-          <tr *ngFor="let clinique of cliniques">
-            <td> {{clinique.cliniqueNumber}}</td>
-            <td> {{clinique.cliniqueName}}</td>
-            <td> {{clinique.adresse}}</td>
-            <td> {{clinique.telNumber}}</td>
-            <td> {{clinique.faxNumber}} </td>
+          <tr *ngFor="let employe of employees">
+            <td> {{employe.noEmploye}}</td>
+            <td> {{employe.nom}}</td>
+            <td> {{employe.adresse}}</td>
+            <td> {{employe.dob}}</td>
+            <td> {{employe.sex}} </td>
+            <td> {{employe.tellNum}}</td>
+            <td> {{employe.NAS}}</td>
+            <td> {{employe.salaire}}</td>
+            <td> {{employe.fonction}}</td>
+            <td> {{employe.noClinique}} </td>
           </tr>
         </tbody>
       </table>

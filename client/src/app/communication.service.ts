@@ -3,6 +3,7 @@ import { Injectable } from "@angular/core";
 import { concat, of, Observable, Subject } from "rxjs";
 import { catchError } from "rxjs/operators";
 import { Clinique} from "../../../common/tables/Clinique";
+import { Employe } from "../../../common/tables/Employe";
 import { Proprio } from "../../../common/tables/Proprio";
 
 @Injectable()
@@ -52,6 +53,13 @@ export class CommunicationService {
 
         return this.http.get<Proprio[]>(this.BASE_URL + "/Traitements").pipe(
             catchError(this.handleError<Proprio[]>("getTraitements")),
+        );
+    }
+
+    public getEmployees(): Observable<any[]> {
+
+        return this.http.get<Employe[]>(this.BASE_URL + "/Employees").pipe(
+            catchError(this.handleError<Proprio[]>("getEmployees")),
         );
     }
 

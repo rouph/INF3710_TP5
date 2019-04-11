@@ -3,6 +3,7 @@ import { inject, injectable } from "inversify";
 import * as pg from "pg";
 
 import {Clinique} from "../../../common/tables/Clinique";
+import {Employe} from "../../../common/tables/Employe";
 import {Proprio} from "../../../common/tables/Proprio";
 import {Traitement} from "../../../common/tables/Traitement";
 
@@ -68,6 +69,29 @@ export class DatabaseController {
              console.error(e.stack);
             });
         });
+
+        router.get("/Employees",
+                   (req: Request, res: Response, next: NextFunction) => {
+                // Send the request to the service and send the response
+                this.databaseService.getEmployees().then((result: pg.QueryResult) => {
+                const traitements: Employe[] = result.rows.map((emp: any) => (
+                 {
+                    "noEmploye" : emp.noemploye,
+                    "nom" : emp.nom,
+                    "adresse" : emp.address,
+                    "dob" : emp.dob,
+                    "sex" : emp.sex,
+                    "tellNum" : emp.numtel,
+                    "NAS" : emp.nas,
+                    "salaire" : emp.salaire,
+                    "fonction" : emp.fonction,
+                    "noClinique" : emp.noclinique,
+             }));
+                res.json(traitements);
+         }).catch((e: Error) => {
+             console.error(e.stack);
+            });
+        });
         router.get("/Proprios/no",
                    (req: Request, res: Response, next: NextFunction) => {
                 this.databaseService.getProprietaireNo().then((result: pg.QueryResult) => {
@@ -94,6 +118,7 @@ export class DatabaseController {
                     console.error(e.stack);
                 });
             });
+
         router.get("/Clinique/no",
                    (req: Request, res: Response, next: NextFunction) => {
             this.databaseService.getCliniqueNo().then((result: pg.QueryResult) => {

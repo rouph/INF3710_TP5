@@ -48,6 +48,11 @@ export class DatabaseService {
 
         return this.pool.query('SELECT * FROM TP5_schema.Traitement;');
     }
+
+    public getEmployees(): Promise<pg.QueryResult> {
+
+        return this.pool.query('SELECT * FROM TP5_schema.Employe;');
+    }
        // this.pool.connect();
     public getCliniqueNo(): Promise<pg.QueryResult> {
         return this.pool.query('SELECT noClinique FROM tp5_schema.cliniquevet;');
