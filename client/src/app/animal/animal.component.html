@@ -1,9 +1,50 @@
-
-<div id="hotel" style="text-align: left">
-  <h1> Animals </h1>
-  <div id="error" class="alert alert-danger" role="alert" *ngIf="duplicateError">
-    Insertion sur une cle primaire qui existe deja
+<nav class="navbar navbar-dark bg-dark mb-5">
+  <a class="navbar-brand title" href="/animal">ANIMAL</a>
+  <div class="navbar-expand mr-auto">
+    <div class="navbar-nav">
+      <a class="nav-item nav-link active" href="animals#add">Add</a>
+      <a class="nav-item nav-link active" href="animals#name">Search</a>
+      <a class="nav-item nav-link active" href="animals#traitement">traitement</a>
+    </div>
   </div>
+</nav>
+
+
+<div id="ht" style="text-align:center" *ngIf="route != '/room'">
+  <button type="button" class="btn btn-primary" (click)="getAnimals()">Get Animals</button>
+  <table id ="ht" align="center" border="1" width="95%">
+    <thead>
+      <th> NOANIMAL</th>
+      <th> NOM</th>
+      <th> TYPE</th>
+      <th> DESCRIPTION</th>
+      <th> DOB</th>
+      <th> DATE_INSCRIPTION</th>
+      <th> ETAT</th>
+      <th> NOPROPRIO</th>
+      <th> CLINIQUENO</th>
+    </thead>
+    <tbody>
+      <tr *ngFor="let animal of animals">
+        <td> {{animal.noAnimal}}</td>
+        <td> {{animal.nom}}</td>
+        <td> {{animal.type}}</td>
+        <td> {{animal.description}}</td>
+        <td> {{animal.dob}} </td>
+        <td> {{animal.date_inscription}}</td>
+        <td> {{animal.etat}}</td>
+        <td> {{animal.noProprio}}</td>
+        <td> {{animal.noClinique}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div style="text-align: left">
+    <h1 id="add"> Animals </h1>
+    <div id="error" class="alert alert-danger" role="alert" *ngIf="duplicateError">
+      Insertion sur une cle primaire qui existe deja
+    </div>
     <ul style="list-style: none;">
       noAnimal : <li><input class="form-control col-md-4" #noAnimal></li>
       nom : <li><input class="form-control col-md-4" #nom></li>
@@ -13,59 +54,30 @@
       date_inscription : <li><input class="form-control col-md-4" #date_inscription></li>
       etat : <li><input class="form-control col-md-4" #etat></li>
       noProprio : <li>
-                    <select class="form-control col-md-4" #noProprio>
-                    <option  *ngFor="let proprioNo of propriosNo" >{{proprioNo}}</option>
-                    </select>
-                  </li>
+        <select class="form-control col-md-4" #noProprio>
+          <option  *ngFor="let proprioNo of propriosNo" >{{proprioNo}}</option>
+        </select>
+      </li>
       CliniqueNo : <li>
-                    <select class="form-control col-md-4" #noClinique>
-                    <option  *ngFor="let cliniqueNo of cliniquesNo" >{{cliniqueNo}}</option>
-                    </select>
-                  </li>
+        <select class="form-control col-md-4" #noClinique>
+          <option  *ngFor="let cliniqueNo of cliniquesNo" >{{cliniqueNo}}</option>
+        </select>
+      </li>
+    </ul>
     <li><button type="button" class="btn btn-primary" 
       (click)="insertAnimal(noAnimal.value,nom.value, type.value, description.value,
                             dob.value, date_inscription.value, etat.value, 
-                            noProprio.value, noClinique.value )"> Add Animal</button></li>
-    </ul>
+                            noProprio.value, noClinique.value )"> Add Animal</button>  
+      <a type="button" class="btn btn-primary" href="animals#top">Go back to top</a>
+    </li>
+                            
   </div>
-
-  <div id="ht" style="text-align:center" *ngIf="route != '/room'">
-    <button type="button" class="btn btn-primary" (click)="getAnimals()">Get Animals</button>
-    <table id ="ht" align="center" border="1" width="95%">
-      <thead>
-        <th> NOANIMAL</th>
-        <th> NOM</th>
-        <th> TYPE</th>
-        <th> DESCRIPTION</th>
-        <th> DOB</th>
-        <th> DATE_INSCRIPTION</th>
-        <th> ETAT</th>
-        <th> NOPROPRIO</th>
-        <th> CLINIQUENO</th>
-      </thead>
-      <tbody>
-        <tr *ngFor="let animal of animals">
-          <td> {{animal.noAnimal}}</td>
-          <td> {{animal.nom}}</td>
-          <td> {{animal.type}}</td>
-          <td> {{animal.description}}</td>
-          <td> {{animal.dob}} </td>
-          <td> {{animal.date_inscription}}</td>
-          <td> {{animal.etat}}</td>
-          <td> {{animal.noProprio}}</td>
-          <td> {{animal.noClinique}}</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-
-
   <br>
   <br>
   <br>
   <br>
   <br>
-  <h1 style="text-align: left"> Animal from name </h1>
+  <h1 style="text-align: left" id="name"> Animal from name </h1>
   <h4 style="text-align: left"> Note: si rien ne sort, c'est que votre animal n'est pas dans notre base de données! </h4>
   <div id="hotel" style="text-align: left">
     <ul style="list-style: none;">
@@ -100,7 +112,10 @@
         </tr>
       </tbody>
     </table>
+    <a type="button" class="btn btn-primary" href="animals#top">Go back to top</a>
+
   </div>
+
   <br>
   <br>
   <br>
@@ -110,7 +125,7 @@
   <br>
   <br>
   <br>
-  <h1 style="text-align: left"> Traitements d'un animal à partir de sa clé primaire </h1>
+  <h1 style="text-align: left" id="traitement"> Traitements d'un animal à partir de sa clé primaire </h1>
   <div id="hotel" style="text-align: left">
     <ul style="list-style: none;">
       noAnimal : <li><input class="form-control col-md-4" #noAnimalQ2></li>
@@ -133,6 +148,8 @@
         </tr>
       </tbody>
     </table>
+    <a type="button" class="btn btn-primary" href="animals#top">Go back to top</a>
+
   </div>
   <br>
   <br>
