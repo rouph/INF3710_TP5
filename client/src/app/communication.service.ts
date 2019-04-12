@@ -1,5 +1,5 @@
 import { HttpClient } from "@angular/common/http";
-import { Injectable, SystemJsNgModuleLoader } from "@angular/core";
+import { Injectable } from "@angular/core";
 import { concat, of, Observable, Subject } from "rxjs";
 import { catchError } from "rxjs/operators";
 import { Animal } from "../../../common/tables/Animal";
