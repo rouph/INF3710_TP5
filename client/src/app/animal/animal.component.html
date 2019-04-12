@@ -11,7 +11,6 @@
 
 
 <div id="ht" style="text-align:center" *ngIf="route != '/room'">
-  <button type="button" class="btn btn-primary" (click)="getAnimals()">Get Animals</button>
   <table id ="ht" align="center" border="1" width="95%">
     <thead>
       <th> NOANIMAL</th>
@@ -23,18 +22,21 @@
       <th> ETAT</th>
       <th> NOPROPRIO</th>
       <th> CLINIQUENO</th>
+      <th> CLINIQUENO</th>
     </thead>
     <tbody>
       <tr *ngFor="let animal of animals">
         <td> {{animal.noAnimal}}</td>
-        <td> {{animal.nom}}</td>
+        <td> <input id="nom-{{animal.noAnimal}}" type="text" value={{animal.nom}} style="background-color: #ffffff;" ></td>
         <td> {{animal.type}}</td>
-        <td> {{animal.description}}</td>
+        <td> <input id="desc-{{animal.noAnimal}}" type="text" value={{animal.description}} style="background-color: #ffffff;" ></td>
         <td> {{animal.dob}} </td>
         <td> {{animal.date_inscription}}</td>
-        <td> {{animal.etat}}</td>
+        <td> <input id="desc-{{animal.noAnimal}}" type="text" value={{animal.etat}} style="background-color: #ffffff;" ></td>
         <td> {{animal.noProprio}}</td>
         <td> {{animal.noClinique}}</td>
+        <td> <button type="button" (click)="delete(animal.noAnimal,animal.noClinique)" class="btn btn-primary">delete</button></td>
+        <td> <button type="button" class="btn btn-primary">update</button></td>
       </tr>
     </tbody>
   </table>

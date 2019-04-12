@@ -27,6 +27,14 @@ export class DatabaseController {
                         console.error(e.stack);
                     });
                 });
+        router.delete("/deleteAnimal",
+                      (req: Request, res: Response, next: NextFunction) => {
+                        this.databaseService.delteAnimal(req.query.noAnimal_, req.query.noClinique_).then((result: pg.QueryResult) => {
+                            res.json(result);
+                        }).catch((e: Error) => {
+                            console.error(e.stack);
+                        });
+                });
 
         router.post("/populateDb",
                     (req: Request, res: Response, next: NextFunction) => {
@@ -81,7 +89,7 @@ export class DatabaseController {
                      "description" : tra.description,
                      "cout" : tra.cout,
              }));
-             res.json(traitements);
+                res.json(traitements);
          }).catch((e: Error) => {
              console.error(e.stack);
             });

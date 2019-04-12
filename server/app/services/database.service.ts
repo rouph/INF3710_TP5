@@ -58,6 +58,10 @@ export class DatabaseService {
 
         return this.pool.query('SELECT * FROM TP5_schema.Animal;');
     }
+    public delteAnimal(noAnimal: string, noClinique: string): Promise<pg.QueryResult> {
+
+        return this.pool.query("DELETE FROM TP5_schema.Animal WHERE noAnimal = '" + noAnimal + "' AND noCLinique ='" + noClinique +"';");
+    }
 
     public getAnimalsFromName(nom: string): Promise<pg.QueryResult> {
         console.log(nom);

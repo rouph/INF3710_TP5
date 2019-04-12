@@ -78,4 +78,10 @@ export class AnimalComponent implements OnInit {
     });
   }
 
+  public delete(noAnimal: string, noClinique: string): void {
+    this.communicationService.deleteAnimal(noAnimal, noClinique).subscribe((traitement: any) => {
+        this.getAnimals();
+    });
+  }
+
 }

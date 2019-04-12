@@ -86,7 +86,13 @@ export class CommunicationService {
             catchError(this.handleError<Traitement[]>("getTraitementsFFK")),
         );
     }
-
+    public deleteAnimal(noAnimal: string, noClinique: string): Observable<any[]> {
+        console.log(noAnimal);
+        return this.http.delete<any>(this.BASE_URL + "/deleteAnimal",
+                                     {params: {noAnimal_: noAnimal, noClinique_: noClinique }}).pipe(
+            catchError(this.handleError<any>("deleteAnimal")),
+        );
+    }
     public insertClinique(clinique: any): Observable<number> {
         return this.http.post<number>(this.BASE_URL + "/clinique/insert", clinique).pipe(
             catchError(this.handleError<number>("insertClinique")),
