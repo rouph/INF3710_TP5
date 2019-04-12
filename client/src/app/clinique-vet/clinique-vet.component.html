@@ -5,24 +5,24 @@
     Insertion sur une cle primaire qui existe deja
   </div>
     <ul style="list-style: none;">
-      CliniqueNo : <li><input class="form-control col-md-4" #cliniqueNo></li>
-      cliniqueName : <li><input class="form-control col-md-4" #cliniqueName></li>
-      Clinique Adresse : <li><input class="form-control col-md-4" #adresse></li>
-      Tel number : <li><input  class="form-control col-md-4" #telNumber></li>
-      Fax number : <li><input  class="form-control col-md-4" #faxNumber></li>
+      NoClinique : <li><input class="form-control col-md-4" #cliniqueNo></li>
+      Nom : <li><input class="form-control col-md-4" #cliniqueName></li>
+      Adresse : <li><input class="form-control col-md-4" #adresse></li>
+      Tel : <li><input  class="form-control col-md-4" #telNumber></li>
+      Fax : <li><input  class="form-control col-md-4" #faxNumber></li>
     <li><button type="button" class="btn btn-primary" 
-      (click)="insertClinique(cliniqueNo.value,cliniqueName.value, adresse.value, telNumber.value,faxNumber.value)"> Add Clinique</button></li>
+      (click)="insertClinique(cliniqueNo.value,cliniqueName.value, adresse.value, telNumber.value,faxNumber.value)"> Ajouter Clinique</button></li>
     </ul>
   </div>
 
   <div id="ht" style="text-align:center" *ngIf="route != '/room'">
-    <button type="button" class="btn btn-primary" (click)="getCliniques()">Get Cliniques</button>
+    <button type="button" class="btn btn-primary" (click)="getCliniques()">Obtenir Cliniques</button>
     <table id ="ht" align="center" border="1" width="95%">
       <thead>
         <th> CLINIQUE NO</th>
         <th> NOM</th>
         <th> ADRESSE</th>
-        <th> TELL NUM</th>
+        <th> TEL </th>
         <th> FAX</th>
       </thead>
       <tbody>

@@ -5,9 +5,9 @@
     <div class="navbar-expand mr-auto">
       <div class="navbar-nav">
         <a class="nav-item nav-link active" routerLink="/clinique">Cliniques</a>
-        <a class="nav-item nav-link active" routerLink="/proprio">Proprio</a>
+        <a class="nav-item nav-link active" routerLink="/proprio">Propriétaires</a>
         <a class="nav-item nav-link active" routerLink="/employe">Employés</a>
-        <a class="nav-item nav-link active" routerLink="/animals">Animals</a>
+        <a class="nav-item nav-link active" routerLink="/animals">Animaux</a>
         <a class="nav-item nav-link active" routerLink="/traitement">Traitements</a>
       </div>
     </div>
@@ -15,7 +15,7 @@
 
 <div style="text-align:center">
 <div *ngIf="route == ''" id="top">
-  <button type="button" class="btn btn-danger" (click) ="createDB()">Reset Database</button>
+  <button type="button" class="btn btn-danger" (click) ="createDB()">Réinitialiser la base de données</button>
 </div>
 
 <router-outlet></router-outlet>

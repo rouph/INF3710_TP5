@@ -5,21 +5,21 @@
     Insertion sur une cle primaire qui existe deja
   </div>
     <ul style="list-style: none;">
-      noTraitement : <li><input class="form-control col-md-4" #noTraitement></li>
-      description : <li><input class="form-control col-md-4" #description></li>
-      cout			 : <li><input class="form-control col-md-4" #cout></li>
+      NoTraitement : <li><input class="form-control col-md-4" #noTraitement></li>
+      Description : <li><input class="form-control col-md-4" #description></li>
+      Coût			 : <li><input class="form-control col-md-4" #cout></li>
     <li><button type="button" class="btn btn-primary" 
-      (click)="insertTraitement(noTraitement.value, description.value, cout.value)"> Add Traitement</button></li>
+      (click)="insertTraitement(noTraitement.value, description.value, cout.value)"> Ajouter Traitement</button></li>
     </ul>
   </div>
 
   <div id="ht" style="text-align:center" *ngIf="route != '/room'">
-    <button type="button" class="btn btn-primary" (click)="getTraitements()">Get Traitements</button>
+    <button type="button" class="btn btn-primary" (click)="getTraitements()">Obtenir Traitements</button>
     <table id ="ht" align="center" border="1" width="95%">
       <thead>
         <th> NO TRAITEMENT</th>
         <th> DESCRIPTION</th>
-        <th> COUT</th>
+        <th> COÛT</th>
       </thead>
       <tbody>
         <tr *ngFor="let traitement of traitements">

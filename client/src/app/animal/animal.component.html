@@ -1,10 +1,10 @@
 <nav class="navbar navbar-dark bg-dark mb-5">
-  <a class="navbar-brand title" href="/animal">ANIMAL</a>
+  <a class="navbar-brand title" href="/animal">Animal</a>
   <div class="navbar-expand mr-auto">
     <div class="navbar-nav">
-      <a class="nav-item nav-link active" href="animals#add">Add</a>
-      <a class="nav-item nav-link active" href="animals#name">Search</a>
-      <a class="nav-item nav-link active" href="animals#traitement">traitement</a>
+      <a class="nav-item nav-link active" href="animals#add">Ajouter</a>
+      <a class="nav-item nav-link active" href="animals#name">Rechercher</a>
+      <a class="nav-item nav-link active" href="animals#traitement">Traitement</a>
     </div>
   </div>
 </nav>
@@ -35,8 +35,8 @@
         <td> <input id="desc-{{animal.noAnimal}}" type="text" value={{animal.etat}} style="background-color: #ffffff;" #state></td>
         <td> {{animal.noProprio}}</td>
         <td> {{animal.noClinique}}</td>
-        <td> <button type="button" (click)="delete(animal.noAnimal,animal.noClinique)" class="btn btn-primary">delete</button></td>
-        <td> <button type="button" (click)="updateAnimal(animal.noAnimal,animal.noClinique,name.value,desc.value , state.value )" class="btn btn-primary">update</button></td>
+        <td> <button type="button" (click)="delete(animal.noAnimal,animal.noClinique)" class="btn btn-primary">Supprimer</button></td>
+        <td> <button type="button" (click)="updateAnimal(animal.noAnimal,animal.noClinique,name.value,desc.value , state.value )" class="btn btn-primary">MAJ</button></td>
       </tr>
     </tbody>
   </table>
@@ -69,8 +69,8 @@
     <li><button type="button" class="btn btn-primary" 
       (click)="insertAnimal(noAnimal.value,nom.value, type.value, description.value,
                             dob.value, date_inscription.value, etat.value, 
-                            noProprio.value, noClinique.value )"> Add Animal</button>  
-      <a type="button" class="btn btn-primary" href="animals#top">Go back to top</a>
+                            noProprio.value, noClinique.value )"> Ajouter Animal</button>  
+      <a type="button" class="btn btn-primary" href="animals#top">Haut de page</a>
     </li>
                             
   </div>
@@ -79,7 +79,7 @@
   <br>
   <br>
   <br>
-  <h1 style="text-align: left" id="name"> Animal from name </h1>
+  <h1 style="text-align: left" id="name"> Animal selon le nom </h1>
   <h4 style="text-align: left"> Note: si rien ne sort, c'est que votre animal n'est pas dans notre base de données! </h4>
   <div id="hotel" style="text-align: left">
     <ul style="list-style: none;">
@@ -87,7 +87,7 @@
     </ul>
   </div>
   <div id="ht" style="text-align:center" *ngIf="route != '/room'">
-    <button type="button" class="btn btn-primary" (click)="getAnimalsFromName(nomFN.value)">Get Animal from name </button>
+    <button type="button" class="btn btn-primary" (click)="getAnimalsFromName(nomFN.value)">Obtenir animal selon le nom</button>
     <table id ="ht" align="center" border="1" width="95%">
       <thead>
         <th> NOANIMAL</th>
@@ -114,7 +114,7 @@
         </tr>
       </tbody>
     </table>
-    <a type="button" class="btn btn-primary" href="animals#top">Go back to top</a>
+    <a type="button" class="btn btn-primary" href="animals#top">Haut de page</a>
 
   </div>
 
@@ -135,7 +135,7 @@
     </ul>
   </div>
   <div id="ht" style="text-align:center" *ngIf="route != '/room'">
-    <button type="button" class="btn btn-primary" (click)="getTraitementsFFK(noAnimalQ2.value, noCliniqueQ2.value)">Get Animal from name </button>
+    <button type="button" class="btn btn-primary" (click)="getTraitementsFFK(noAnimalQ2.value, noCliniqueQ2.value)">Obtenir traitement selon clé primaire</button>
     <table id ="ht" align="center" border="1" width="95%">
       <thead>
         <th> NO TRAITEMENT</th>
@@ -150,7 +150,7 @@
         </tr>
       </tbody>
     </table>
-    <a type="button" class="btn btn-primary" href="animals#top">Go back to top</a>
+    <a type="button" class="btn btn-primary" href="animals#top">Haut de page</a>
 
   </div>
   <br>

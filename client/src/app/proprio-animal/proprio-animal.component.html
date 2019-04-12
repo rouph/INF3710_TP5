@@ -1,27 +1,28 @@
 
 <div id="hotel" style="text-align: left">
-  <h1> Proprio d'animals</h1>
+  <h1> Propriétaire d'animals
+  </h1>
   <div id="error" class="alert alert-danger" role="alert" *ngIf="duplicateError">
     Insertion sur une cle primaire qui existe deja
   </div>
     <ul style="list-style: none;">
-      noProprietaire : <li><input class="form-control col-md-4" #noProprietaire></li>
-      nom : <li><input class="form-control col-md-4" #nom></li>
-      adresse			 : <li><input class="form-control col-md-4" #adresse></li>
-      numTel : <li><input  class="form-control col-md-4" #numTel></li>
+      NoPropriétaire : <li><input class="form-control col-md-4" #noProprietaire></li>
+      Nom : <li><input class="form-control col-md-4" #nom></li>
+      Adresse			 : <li><input class="form-control col-md-4" #adresse></li>
+      Tel : <li><input  class="form-control col-md-4" #numTel></li>
     <li><button type="button" class="btn btn-primary" 
-      (click)="insertProprio(noProprietaire.value, nom.value, adresse.value, adresse.value,numTel.value)"> Add Proprio</button></li>
+      (click)="insertProprio(noProprietaire.value, nom.value, adresse.value, adresse.value,numTel.value)"> Ajouter Propriétaire</button></li>
     </ul>
   </div>
 
   <div id="ht" style="text-align:center" *ngIf="route != '/room'">
-    <button type="button" class="btn btn-primary" (click)="getProprios()">Get Proprios</button>
+    <button type="button" class="btn btn-primary" (click)="getProprios()">Obtenir Propriétaires</button>
     <table id ="ht" align="center" border="1" width="95%">
       <thead>
         <th> NO PROPRIO</th>
         <th> NOM</th>
         <th> ADRESSE</th>
-        <th> NUM TEL</th>
+        <th> TEL</th>
       </thead>
       <tbody>
         <tr *ngFor="let proprio of proprios">
