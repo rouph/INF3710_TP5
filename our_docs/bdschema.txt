@@ -1,3 +1,16 @@
+
+SELECT * FROM TP5_schema.Animal;
+DELETE FROM TP5_schema.Animal 
+WHERE noAnimal = 'A002 ' AND noCLinique = 'C50';
+
+
+
+
+
+DELETE FROM TP5_schema.Animal WHERE noAnimal = 'A002 ' AND noCLinique ='C50';
+
+
+
 --Hugo Lirette(1896849) et Elie Rouphael(1829529)
 
 SET search_path = TP5;
@@ -34,7 +47,7 @@ CREATE TABLE IF NOT EXISTS TP5_schema.Employe (
 		PRIMARY KEY(noEmploye),
 		FOREIGN KEY(noClinique) references TP5_schema.CliniqueVet(noClinique));
 
---Vétérinaire(noEmployé, estDisponible)
+--Vï¿½tï¿½rinaire(noEmployï¿½, estDisponible)
 DROP TABLE IF EXISTS TP5_schema.Veterinaire CASCADE;																  
 CREATE TABLE IF NOT EXISTS TP5_schema.Veterinaire (
 		noEmploye		VARCHAR(10)	NOT NULL,
@@ -42,7 +55,7 @@ CREATE TABLE IF NOT EXISTS TP5_schema.Veterinaire (
 		PRIMARY KEY(noEmploye),
 		FOREIGN KEY (noEmploye) references TP5_schema.Employe(noEmploye) ON DELETE CASCADE);														  
 
---Proprietaire D’animal (noProprietaire, nom,adresse, numTel)
+--Proprietaire Dï¿½animal (noProprietaire, nom,adresse, numTel)
 DROP TABLE IF EXISTS TP5_schema.Proprietaire CASCADE;												  
 CREATE TABLE IF NOT EXISTS TP5_schema.Proprietaire (
 		noProprietaire	VARCHAR(30)		NOT NULL,
@@ -60,7 +73,7 @@ CREATE TABLE IF NOT EXISTS TP5_schema.Contact (
 		FOREIGN KEY (noProprietaire) references TP5_schema.Proprietaire (noProprietaire),
 		FOREIGN KEY (noClinique) references TP5_schema.CliniqueVet (noClinique));
 
---Animal (noAnimal, nom,type,description,dob,date d’inscription,etat, noProprietaire, noClinique)
+--Animal (noAnimal, nom,type,description,dob,date dï¿½inscription,etat, noProprietaire, noClinique)
 DROP TABLE IF EXISTS TP5_schema.Animal CASCADE;	
 CREATE TABLE IF NOT EXISTS TP5_schema.Animal (
 		noAnimal			VARCHAR(30)		NOT NULL,
@@ -74,7 +87,8 @@ CREATE TABLE IF NOT EXISTS TP5_schema.Animal (
 		noClinique			VARCHAR(10)		NOT NULL,
 		PRIMARY KEY(noAnimal, noClinique),																
 		FOREIGN KEY (noProprietaire) references TP5_schema.Proprietaire (noProprietaire),
-		FOREIGN KEY (noClinique) references TP5_schema.CliniqueVet (noClinique));
+		FOREIGN KEY (noClinique) references TP5_schema.CliniqueVet (noClinique)
+		ON DELETE cascade);
 
 --Examen (noExamen, noAnimal, noClinique, date, heure, noVet)
 DROP TABLE IF EXISTS TP5_schema.Examen CASCADE;	
@@ -87,7 +101,8 @@ CREATE TABLE IF NOT EXISTS TP5_schema.Examen (
 		noEmploye		VARCHAR(10)		NOT NULL,
 		PRIMARY KEY(noExamen),
 		FOREIGN KEY (noEmploye) references TP5_schema.Veterinaire (noEmploye),
-		FOREIGN KEY(noAnimal, noClinique) references TP5_schema.Animal (noAnimal, noClinique));
+		FOREIGN KEY(noAnimal, noClinique) references TP5_schema.Animal (noAnimal, noClinique)
+		ON DELETE CASCADE );
 
 --Traitement (noTraitement, description, cout)
 DROP TABLE IF EXISTS TP5_schema.Traitement CASCADE;	
@@ -97,7 +112,7 @@ CREATE TABLE IF NOT EXISTS TP5_schema.Traitement (
 		cout			INT				NOT NULL,
 PRIMARY KEY(noTraitement));
 
---Proposition traitement(noTraitement, noExamen, quantité, date de début, date de fin)
+--Proposition traitement(noTraitement, noExamen, quantitï¿½, date de dï¿½but, date de fin)
 DROP TABLE IF EXISTS TP5_schema.PropositionTraitement CASCADE;	
 CREATE TABLE IF NOT EXISTS TP5_schema.PropositionTraitement (
 		noTraitement	VARCHAR(30)		NOT NULL, 		
@@ -107,4 +122,5 @@ CREATE TABLE IF NOT EXISTS TP5_schema.PropositionTraitement (
 		dateDeFin		DATE			NOT NULL,
 PRIMARY KEY(noTraitement, noExamen),
 FOREIGN KEY (noTraitement) references TP5_schema.Traitement (noTraitement),
-FOREIGN KEY (noExamen) references TP5_schema.Examen (noExamen));
+FOREIGN KEY (noExamen) references TP5_schema.Examen (noExamen)
+ON DELETE CASCADE);
