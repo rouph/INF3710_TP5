@@ -27,16 +27,16 @@
     <tbody>
       <tr *ngFor="let animal of animals">
         <td> {{animal.noAnimal}}</td>
-        <td> <input id="nom-{{animal.noAnimal}}" type="text" value={{animal.nom}} style="background-color: #ffffff;" ></td>
+        <td> <input id="nom-{{animal.noAnimal}}" type="text" value={{animal.nom}} style="background-color: #ffffff;"  #name></td>
         <td> {{animal.type}}</td>
-        <td> <input id="desc-{{animal.noAnimal}}" type="text" value={{animal.description}} style="background-color: #ffffff;" ></td>
+        <td> <input id="desc-{{animal.noAnimal}}" type="text" value={{animal.description}} style="background-color: #ffffff;" #desc></td>
         <td> {{animal.dob}} </td>
         <td> {{animal.date_inscription}}</td>
-        <td> <input id="desc-{{animal.noAnimal}}" type="text" value={{animal.etat}} style="background-color: #ffffff;" ></td>
+        <td> <input id="desc-{{animal.noAnimal}}" type="text" value={{animal.etat}} style="background-color: #ffffff;" #state></td>
         <td> {{animal.noProprio}}</td>
         <td> {{animal.noClinique}}</td>
         <td> <button type="button" (click)="delete(animal.noAnimal,animal.noClinique)" class="btn btn-primary">delete</button></td>
-        <td> <button type="button" class="btn btn-primary">update</button></td>
+        <td> <button type="button" (click)="updateAnimal(animal.noAnimal,animal.noClinique,name.value,desc.value , state.value )" class="btn btn-primary">update</button></td>
       </tr>
     </tbody>
   </table>

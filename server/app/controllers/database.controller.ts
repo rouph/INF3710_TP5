@@ -35,6 +35,18 @@ export class DatabaseController {
                             console.error(e.stack);
                         });
                 });
+        router.put("/updateAnimal",
+                   (req: Request, res: Response, next: NextFunction) => {
+                        this.databaseService.updateAnimal(req.body.noAnimal_,
+                                                          req.body.noClinique_,
+                                                          req.body.nom_,
+                                                          req.body.desc_,
+                                                          req.body.etat_).then((result: pg.QueryResult) => {
+                            res.json(result);
+                        }).catch((e: Error) => {
+                            console.error(e.stack);
+                        });
+                });
 
         router.post("/populateDb",
                     (req: Request, res: Response, next: NextFunction) => {

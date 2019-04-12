@@ -1,5 +1,5 @@
 import { HttpClient } from "@angular/common/http";
-import { Injectable } from "@angular/core";
+import { Injectable, SystemJsNgModuleLoader } from "@angular/core";
 import { concat, of, Observable, Subject } from "rxjs";
 import { catchError } from "rxjs/operators";
 import { Animal } from "../../../common/tables/Animal";
@@ -87,12 +87,21 @@ export class CommunicationService {
         );
     }
     public deleteAnimal(noAnimal: string, noClinique: string): Observable<any[]> {
-        console.log(noAnimal);
         return this.http.delete<any>(this.BASE_URL + "/deleteAnimal",
                                      {params: {noAnimal_: noAnimal, noClinique_: noClinique }}).pipe(
             catchError(this.handleError<any>("deleteAnimal")),
         );
     }
+    public updateAnimal(noAnimal: string, noClinique: string, nom: string, desc: string, etat: string): Observable<any[]> {
+        return this.http.put<any>(this.BASE_URL + "/updateAnimal", { noAnimal_: noAnimal,
+                                                                     noClinique_: noClinique,
+                                                                     nom_: nom,
+                                                                     desc_: desc,
+                                                                     etat_: etat }).pipe(
+            catchError(this.handleError<any>("updateAnimal")),
+        );
+    }
+
     public insertClinique(clinique: any): Observable<number> {
         return this.http.post<number>(this.BASE_URL + "/clinique/insert", clinique).pipe(
             catchError(this.handleError<number>("insertClinique")),

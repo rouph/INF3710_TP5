@@ -83,5 +83,9 @@ export class AnimalComponent implements OnInit {
         this.getAnimals();
     });
   }
-
+  public updateAnimal(noAnimal: string, noClinique: string, nom:string, desc:string, etat: string): void {
+    this.communicationService.updateAnimal(noAnimal, noClinique, nom, desc, etat).subscribe((traitement: any) => {
+        this.getAnimals();
+    });
+  }
 }

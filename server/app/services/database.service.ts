@@ -62,22 +62,34 @@ export class DatabaseService {
 
         return this.pool.query("DELETE FROM TP5_schema.Animal WHERE noAnimal = '" + noAnimal + "' AND noCLinique ='" + noClinique +"';");
     }
+    public updateAnimal(noAnimal: string, noClinique: string, nom: string, desc: string, etat: string): Promise<pg.QueryResult> {
 
+        let query: string = '';
+        query += "UPDATE  TP5_schema.Animal SET nom= '";
+        query += nom;
+        query += "' , description = '";
+        query += desc;
+        query += "' , etat = '";
+        query += etat;
+        query += "' WHERE noAnimal='";
+        query += noAnimal;
+        query += "' AND noCLinique = '";
+        query += noClinique;
+        query += "';";
+        return this.pool.query(query);
+
+    }
     public getAnimalsFromName(nom: string): Promise<pg.QueryResult> {
-        console.log(nom);
         let query: string = '';
         query += "SELECT * FROM TP5_schema.Animal WHERE LOWER(nom) LIKE LOWER('%";
         query += nom;
         query += "%');";
-        console.log(query);
 
         return this.pool.query(query);
     }
 
     public getTraitementsFFK(noAnimal: string, noClinique: string): Promise<pg.QueryResult> {
         let query: string = '';
-        console.log(noAnimal);
-        console.log(noClinique);
         query += "SELECT * FROM TP5_schema.Traitement WHERE noTraitement IN ( SELECT noTraitement ";
         query += "FROM TP5_schema.PropositionTraitement WHERE noExamen IN ( SELECT noExamen ";
         query += "FROM TP5_schema.Examen WHERE noAnimal = ( SELECT noAnimal FROM TP5_schema.Examen ";
@@ -86,7 +98,6 @@ export class DatabaseService {
         query += "' AND noCLinique = '";
         query += noClinique;
         query += "')));";
-        console.log(query);
 
         return this.pool.query(query);
     }
@@ -101,7 +112,6 @@ export class DatabaseService {
 
     public createClinique(cliniqueNumber: string, cliniqueName: string,
                           adresse: string, telNumber: string, faxNumber: string): Promise<pg.QueryResult> {
-      //  this.pool.connect();
         const values: string[] = [
             cliniqueNumber,
             cliniqueName,
