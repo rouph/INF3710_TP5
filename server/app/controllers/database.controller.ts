@@ -6,7 +6,7 @@ import { Animal } from "../../../common/tables/Animal";
 import {Clinique} from "../../../common/tables/Clinique";
 import {Employe} from "../../../common/tables/Employe";
 import {Proprio} from "../../../common/tables/Proprio";
-import {Traitement} from "../../../common/tables/Traitement";
+import {Traitement, TraitementFFK} from "../../../common/tables/Traitement";
 
 import { DatabaseService } from "../services/database.service";
 import Types from "../types";
@@ -95,11 +95,15 @@ export class DatabaseController {
                    (req: Request, res: Response, next: NextFunction) => {
                 // Send the request to the service and send the response
                 this.databaseService.getTraitementsFFK(req.query.noAnimal_, req.query.noClinique_).then((result: pg.QueryResult) => {
-                const traitements: Traitement[] = result.rows.map((tra: any) => (
+                const traitements: TraitementFFK[] = result.rows.map((tra: any) => (
                  {
+                     "noExamen": tra.noexamen,
                      "noTraitement" : tra.notraitement,
                      "description" : tra.description,
                      "cout" : tra.cout,
+                     "quantite": tra.quantite,
+                     "datededebut": tra.datededebut,
+                     "datedefin": tra.datedefin,
              }));
                 res.json(traitements);
          }).catch((e: Error) => {

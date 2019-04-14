@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { Animal } from "../../../../common/tables/Animal";
-import { Traitement } from "../../../../common/tables/Traitement";
+import { Traitement, TraitementFFK } from "../../../../common/tables/Traitement";
 import { CommunicationService } from "../communication.service";
 
 @Component({
@@ -14,7 +14,7 @@ export class AnimalComponent implements OnInit {
   public duplicateError: boolean = false;
   public animals: Animal[] = [];
   public animalsFN: Animal[] = [];
-  public traitements: Traitement[] = [];
+  public traitements: TraitementFFK[] = [];
   public facture: Traitement[] = [];
 
   public constructor(private communicationService: CommunicationService) { }

@@ -4,6 +4,7 @@
       <a class="nav-item nav-link active" href="animals#add">Ajouter</a>
       <a class="nav-item nav-link active" href="animals#name">Rechercher</a>
       <a class="nav-item nav-link active" href="animals#traitement">Traitement</a>
+      <a class="nav-item nav-link active" href="animals#facture">Facture</a>
     </div>
   </div>
 </nav>
@@ -137,15 +138,23 @@
     <button type="button" class="btn btn-primary" (click)="getTraitementsFFK(noAnimalQ2.value, noCliniqueQ2.value)">Obtenir traitement selon clé primaire</button>
     <table id ="ht" align="center" border="1" width="95%">
       <thead>
+        <th> NO EXAMEN</th>
         <th> NO TRAITEMENT</th>
         <th> DESCRIPTION</th>
         <th> COUT</th>
+        <th> QUANTITE</th>
+        <th> DATE DE DEBUT</th>
+        <th> DATE DE FIN</th>
       </thead>
       <tbody>
         <tr *ngFor="let traitement of traitements">
+          <td> {{traitement.noExamen}}</td>
           <td> {{traitement.noTraitement}}</td>
           <td> {{traitement.description}}</td>
           <td> {{traitement.cout}}</td>
+          <td> {{traitement.quantite}}</td>
+          <td> {{traitement.datededebut}}</td>
+          <td> {{traitement.datedefin}}</td>
         </tr>
       </tbody>
     </table>

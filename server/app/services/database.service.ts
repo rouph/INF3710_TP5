@@ -90,14 +90,16 @@ export class DatabaseService {
 
     public getTraitementsFFK(noAnimal: string, noClinique: string): Promise<pg.QueryResult> {
         let query: string = '';
-        query += "SELECT * FROM TP5_schema.Traitement WHERE noTraitement IN ( SELECT noTraitement ";
-        query += "FROM TP5_schema.PropositionTraitement WHERE noExamen IN ( SELECT noExamen ";
-        query += "FROM TP5_schema.Examen WHERE noAnimal = ( SELECT noAnimal FROM TP5_schema.Examen ";
-        query += "WHERE noAnimal='";
+        query += "Select * FROM( SELECT  ex.noExamen ";
+        query += "FROM TP5_schema.Animal as animal   JOIN TP5_schema.Examen as ex using (noAnimal) ";
+        query += "WHERE animal.noAnimal = '";
         query += noAnimal;
-        query += "' AND noCLinique = '";
+        query += "' AND animal.noClinique='";
         query += noClinique;
-        query += "')));";
+        query += "') as animalExam left join ( SELECT * ";
+        query += "FROM TP5_schema.Traitement AS tr JOIN TP5_schema.PropositionTraitement AS propoTr using (notraitement) ";
+        query += ") as examTRaitement ";
+        query += "using (noExamen);";
 
         return this.pool.query(query);
     }
