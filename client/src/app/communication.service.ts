@@ -86,6 +86,13 @@ export class CommunicationService {
             catchError(this.handleError<Traitement[]>("getTraitementsFFK")),
         );
     }
+    public getFacture(noAnimal: string, noClinique: string): Observable<any[]> {
+
+        return this.http.get<Traitement[]>(this.BASE_URL + "/getFacture",
+                                           {params: {noAnimal_: noAnimal, noClinique_: noClinique }}).pipe(
+            catchError(this.handleError<Traitement[]>("getFacture")),
+        );
+    }
     public deleteAnimal(noAnimal: string, noClinique: string): Observable<any[]> {
         return this.http.delete<any>(this.BASE_URL + "/deleteAnimal",
                                      {params: {noAnimal_: noAnimal, noClinique_: noClinique }}).pipe(

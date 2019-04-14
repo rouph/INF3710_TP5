@@ -102,6 +102,27 @@ export class DatabaseService {
         return this.pool.query(query);
     }
 
+    public getFacture(noAnimal: string, noClinique: string): Promise<pg.QueryResult> {
+        let query: string = '';
+        query += "SELECT notraitement,coalesce(description, 'Total') as description, sum(cout) as cout ";
+        query += "FROM TP5_schema.Traitement ";
+        query += "WHERE noTraitement IN ( ";
+        query += "SELECT noTraitement ";
+        query += "FROM TP5_schema.PropositionTraitement  ";
+        query += "WHERE noExamen IN (  ";
+        query += "SELECT noExamen ";
+        query += "FROM TP5_schema.Examen ";
+        query += "WHERE noAnimal = ( ";
+        query += "SELECT noAnimal ";
+        query += "FROM TP5_schema.Examen WHERE noAnimal='";
+        query += noAnimal;
+        query += "' AND noCLinique = '";
+        query += noClinique;
+        query += "')))GROUP BY GROUPING SETS ((notraitement, description), ()) ORDER BY (cout);";
+
+        return this.pool.query(query);
+    }
+
     public getCliniqueNo(): Promise<pg.QueryResult> {
         return this.pool.query('SELECT noClinique FROM tp5_schema.cliniquevet;');
     }

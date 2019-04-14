@@ -15,6 +15,7 @@ export class AnimalComponent implements OnInit {
   public animals: Animal[] = [];
   public animalsFN: Animal[] = [];
   public traitements: Traitement[] = [];
+  public facture: Traitement[] = [];
 
   public constructor(private communicationService: CommunicationService) { }
 
@@ -75,6 +76,11 @@ export class AnimalComponent implements OnInit {
   public getTraitementsFFK(noAnimal: string, noClinique: string): void {
     this.communicationService.getTraitementsFFK(noAnimal, noClinique).subscribe((traitement: Traitement[]) => {
         this.traitements = traitement;
+    });
+  }
+  public getFacture(noAnimal: string, noClinique: string): void {
+    this.communicationService.getFacture(noAnimal, noClinique).subscribe((traitement: Traitement[]) => {
+        this.facture = traitement;
     });
   }
 

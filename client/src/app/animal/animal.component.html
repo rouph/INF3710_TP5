@@ -162,4 +162,48 @@
   <br>
   <br>
   <br>
-  
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <h1 style="text-align: left" id="facture"> Facture Par Examen </h1>
+  <div id="hotel" style="text-align: left">
+    <ul style="list-style: none;">
+      noAnimal : <li><input class="form-control col-md-4" #noAnimalQ4></li>
+      noClinique : <li><input class="form-control col-md-4" #noCliniqueQ4></li>
+    </ul>
+  </div>
+  <div id="ht" style="text-align:center" *ngIf="route != '/room'">
+    <button type="button" class="btn btn-primary" (click)="getFacture(noAnimalQ4.value, noCliniqueQ4.value)">Obtenir facture </button>
+    <table id ="ht" align="center" border="1" width="95%">
+      <thead>
+        <th> NO TRAITEMENT</th>
+        <th> DESCRIPTION</th>
+        <th> COUT</th>
+      </thead>
+      <tbody>
+        <tr *ngFor="let facturerow of facture">
+          <td> {{facturerow.noTraitement}}</td>
+          <td> {{facturerow.description}}</td>
+          <td> {{facturerow.cout}}</td>
+        </tr>
+      </tbody>
+    </table>
+    <a type="button" class="btn btn-primary" href="animals#top">Haut de page</a>
+
+  </div>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
