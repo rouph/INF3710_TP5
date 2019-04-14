@@ -49,7 +49,8 @@ INSERT INTO TP5_schema.Animal VALUES ('A007', 'Zoe', 'chien', 'beautiful', date'
 INSERT INTO TP5_schema.Animal VALUES ('A008', 'sebastien', 'chat', 'labrador', date'2017-03-19', date'2019-04-04', 'mort', 'P953','C26');
 		
 --Examen (noExamen, noAnimal, noClinique, date, heure, noVet)
-INSERT INTO TP5_schema.Examen VALUES ('Ex01', 'A001', 'C50', date'2019-4-5','1000','E750');											
+INSERT INTO TP5_schema.Examen VALUES ('Ex01', 'A001', 'C50', date'2019-4-5','1000','E750');		
+INSERT INTO TP5_schema.Examen VALUES ('Ex09', 'A001', 'C50', date'2019-6-7','1000','E750');	
 INSERT INTO TP5_schema.Examen VALUES ('Ex02', 'A002', 'C50', date'2019-4-5','1000','E750');
 INSERT INTO TP5_schema.Examen VALUES ('Ex03', 'A003', 'C50', date'2019-4-5','1000','E750');
 INSERT INTO TP5_schema.Examen VALUES ('Ex04', 'A004', 'C50', date'2019-4-5','1000','E750');
@@ -71,6 +72,8 @@ INSERT INTO TP5_schema.PropositionTraitement VALUES ('T110', 'Ex01', '2', DATE'2
 INSERT INTO TP5_schema.PropositionTraitement VALUES ('T112', 'Ex02', '1', DATE'2019-4-5',DATE'2019-4-23');
 INSERT INTO TP5_schema.PropositionTraitement VALUES ('T114', 'Ex03', '10', DATE'2019-4-5',DATE'2019-4-23');
 INSERT INTO TP5_schema.PropositionTraitement VALUES ('T116', 'Ex04', '1', DATE'2019-4-5',DATE'2019-4-23');
+
+
 
 INSERT INTO TP5_schema.PropositionTraitement VALUES ('T100', 'Ex01', '1', DATE'2019-4-5',DATE'2019-4-5');
 INSERT INTO TP5_schema.PropositionTraitement VALUES ('T100', 'Ex02', '1', DATE'2019-4-5',DATE'2019-4-5');
