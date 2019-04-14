@@ -96,7 +96,7 @@ export class DatabaseService {
         query += noAnimal;
         query += "' AND animal.noClinique='";
         query += noClinique;
-        query += "') as animalExam left join ( SELECT * ";
+        query += "') as animalExam  join ( SELECT * ";
         query += "FROM TP5_schema.Traitement AS tr JOIN TP5_schema.PropositionTraitement AS propoTr using (notraitement) ";
         query += ") as examTRaitement ";
         query += "using (noExamen);";

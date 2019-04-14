@@ -74,7 +74,7 @@ export class AnimalComponent implements OnInit {
   }
 
   public getTraitementsFFK(noAnimal: string, noClinique: string): void {
-    this.communicationService.getTraitementsFFK(noAnimal, noClinique).subscribe((traitement: Traitement[]) => {
+    this.communicationService.getTraitementsFFK(noAnimal, noClinique).subscribe((traitement: TraitementFFK[]) => {
         this.traitements = traitement;
     });
   }
