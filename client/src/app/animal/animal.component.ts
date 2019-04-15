@@ -58,7 +58,6 @@ export class AnimalComponent implements OnInit {
         }
         this.duplicateError = (res === -1);
     });
-    
   }
 
   public getAnimals(): void {
@@ -85,12 +84,12 @@ export class AnimalComponent implements OnInit {
   }
 
   public delete(noAnimal: string, noClinique: string): void {
-    this.communicationService.deleteAnimal(noAnimal, noClinique).subscribe((traitement: any) => {
+    this.communicationService.deleteAnimal(noAnimal, noClinique).subscribe(() => {
         this.getAnimals();
     });
   }
   public updateAnimal(noAnimal: string, noClinique: string, nom:string, desc:string, etat: string): void {
-    this.communicationService.updateAnimal(noAnimal, noClinique, nom, desc, etat).subscribe((traitement: any) => {
+    this.communicationService.updateAnimal(noAnimal, noClinique, nom, desc, etat).subscribe(() => {
         this.getAnimals();
     });
   }

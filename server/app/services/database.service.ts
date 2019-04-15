@@ -29,11 +29,6 @@ export class DatabaseService {
         return this.pool.query(data);
     }
 
-    public getAllFromTable(tableName: string): Promise<pg.QueryResult> {
-
-        return this.pool.query(`SELECT * FROM HOTELDB.${tableName};`);
-    }
-
     public getCliniques(): Promise<pg.QueryResult> {
 
         return this.pool.query('SELECT * FROM tp5_schema.cliniquevet;');
